@@ -1,0 +1,340 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Main_window_title" xml:space="preserve">
+    <value>Communicator and controller check utility</value>
+  </data>
+  <data name="Main_window_description" xml:space="preserve">
+    <value>This utility is designed to read and change the settings of controllers and communicators produced by the branch "PSDTU" of RUE "Grodnoenergo".</value>
+  </data>
+  <data name="Settings_tab_header" xml:space="preserve">
+    <value>Application settings</value>
+  </data>
+  <data name="Check_devices_tab_header" xml:space="preserve">
+    <value>Checking connection with devices</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Trus Mikhail Petrovich</value>
+  </data>
+  <data name="CheckContent_short_description_header" xml:space="preserve">
+    <value>Short description</value>
+  </data>
+  <data name="CheckContent_short_description_text" xml:space="preserve">
+    <value>In this mode, you can query a list of controllers or communicators.
+The list can be pasted from the clipboard. The clipboard should contain a table with two columns: 'Description' and 'IP address'.
+A ready-made Excel table can also be used. The results can be saved in it.</value>
+  </data>
+  <data name="CheckContent_expander_operations_header" xml:space="preserve">
+    <value>Operations</value>
+  </data>
+  <data name="CheckContent_button_clear_list" xml:space="preserve">
+    <value>Clear list</value>
+  </data>
+  <data name="CheckContent_button_paste_from_clipboard" xml:space="preserve">
+    <value>Paste from clipboard</value>
+  </data>
+  <data name="CheckContent_button_copy_to_clipboard" xml:space="preserve">
+    <value>Copy to clipboard</value>
+  </data>
+  <data name="CheckContent_button_paste_from_excel" xml:space="preserve">
+    <value>Paste from Excel file</value>
+  </data>
+  <data name="CheckContent_button_copy_to_excel" xml:space="preserve">
+    <value>Write the result to an Excel file</value>
+  </data>
+  <data name="CheckContent_button_setup_excel" xml:space="preserve">
+    <value>Configure Excel file settings</value>
+  </data>
+  <data name="CheckContent_grid_column_description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="CheckContent_grid_column_device_type" xml:space="preserve">
+    <value>Device type</value>
+  </data>
+  <data name="CheckContent_grid_column_signal_level" xml:space="preserve">
+    <value>Signal level</value>
+  </data>
+  <data name="CheckContent_grid_column_net_mode" xml:space="preserve">
+    <value>Network mode</value>
+  </data>
+  <data name="CheckContent_grid_column_firmware_version" xml:space="preserve">
+    <value>Firmware date</value>
+  </data>
+  <data name="CheckContent_grid_column_firmware_date" xml:space="preserve">
+    <value>Firmware version</value>
+  </data>
+  <data name="CheckContent_grid_column_number_of_retries" xml:space="preserve">
+    <value>Number of connection attempts</value>
+  </data>
+  <data name="ConnectionParamsContent_info" xml:space="preserve">
+    <value>Connection parameters</value>
+  </data>
+  <data name="ConnectionParamsContent_label_connection_timeout" xml:space="preserve">
+    <value>Connection timeout, seconds</value>
+  </data>
+  <data name="ConnectionParamsContent_label_response_timeout" xml:space="preserve">
+    <value>Response waiting time, seconds</value>
+  </data>
+  <data name="ConnectionParamsContent_label_retries" xml:space="preserve">
+    <value>Attempts:</value>
+  </data>
+  <data name="ConnectionParamsContent_label_pause" xml:space="preserve">
+    <value>Pause between attempts, milliseconds</value>
+  </data>
+  <data name="ConnectionParamsContent_section_interface" xml:space="preserve">
+    <value>UI interface</value>
+  </data>
+  <data name="ConnectionParamsContent_label_use_fluent" xml:space="preserve">
+    <value>Use Fluent theme</value>
+  </data>
+  <data name="ConnectionParamsContent_label_language" xml:space="preserve">
+    <value>Interface language</value>
+  </data>
+  <data name="CurrentState_label_type" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="CurrentState_label_version" xml:space="preserve">
+    <value>version:</value>
+  </data>
+  <data name="CurrentState_label_from" xml:space="preserve">
+    <value>from:</value>
+  </data>
+  <data name="CurrentState_current_mode" xml:space="preserve">
+    <value>Current mode</value>
+  </data>
+  <data name="CurrentState_signal_level" xml:space="preserve">
+    <value>signal level:</value>
+  </data>
+  <data name="CurrentState_db" xml:space="preserve">
+    <value>db</value>
+  </data>
+  <data name="CurrentState_label_subnet" xml:space="preserve">
+    <value>Subnet</value>
+  </data>
+  <data name="CurrentState_label_net_range" xml:space="preserve">
+    <value>range:</value>
+  </data>
+  <data name="CurrentState_label_net_priority" xml:space="preserve">
+    <value>priority:</value>
+  </data>
+  <data name="MainContent_device_ip_address" xml:space="preserve">
+    <value>IP address:</value>
+  </data>
+  <data name="MainContent_tab_current_state" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="MainContent_tab_network_config" xml:space="preserve">
+    <value>Network settings</value>
+  </data>
+  <data name="MainContent_tab_rs485_config" xml:space="preserve">
+    <value>RS485 settings</value>
+  </data>
+  <data name="Function_not_supported_or_no_data" xml:space="preserve">
+    <value>The function is not supported by the device or an invalid response was received from the device.</value>
+  </data>
+  <data name="Write_settings" xml:space="preserve">
+    <value>Save the parameters to the device</value>
+  </data>
+  <data name="NetworkConfig_label_apn" xml:space="preserve">
+    <value>Apn name</value>
+  </data>
+  <data name="Max_field_length_16_chars" xml:space="preserve">
+    <value>Maximum field length is 16 characters</value>
+  </data>
+  <data name="Max_field_length_32_chars" xml:space="preserve">
+    <value>Maximum field length is 32 characters</value>
+  </data>
+  <data name="NetworkConfig_label_apn_user" xml:space="preserve">
+    <value>Apn user name</value>
+  </data>
+  <data name="NetworkConfig_label_apn_password" xml:space="preserve">
+    <value>Apn password</value>
+  </data>
+  <data name="NetworkConfig_label_tcp_port" xml:space="preserve">
+    <value>TCP port</value>
+  </data>
+  <data name="NetworkConfig_tcp_port_tooltip" xml:space="preserve">
+    <value>(used to connect to the device). The maximum value is 65535.</value>
+  </data>
+  <data name="NetworkConfig_label_watchdog_timer" xml:space="preserve">
+    <value>Watchdog timer in minutes</value>
+  </data>
+  <data name="NetworkConfig_label_minutes" xml:space="preserve">
+    <value>minutes</value>
+  </data>
+  <data name="Rs485Config_tooltip" xml:space="preserve">
+    <value>Serial Port Settings (RS485)</value>
+  </data>
+  <data name="Rs485Config_label_baudrate" xml:space="preserve">
+    <value>Data transfer rate</value>
+    <comment>ConnectionParamsContent_label_netStrengthCheckInterval
+</comment>
+  </data>
+  <data name="Rs485Config_label_bits" xml:space="preserve">
+    <value>Number of data bits</value>
+  </data>
+  <data name="Rs485Config_label_parity" xml:space="preserve">
+    <value>Parity</value>
+  </data>
+  <data name="Rs485Config_label_stop_bits" xml:space="preserve">
+    <value>Number of stop bits</value>
+  </data>
+  <data name="Device_tab_header" xml:space="preserve">
+    <value>Device</value>
+  </data>
+  <data name="ReadingVersion" xml:space="preserve">
+    <value>reading version...</value>
+  </data>
+  <data name="IsWritingNewDeviceConfiguration" xml:space="preserve">
+    <value>writing new device configuration...</value>
+  </data>
+  <data name="ReadingNetworkConfiguration" xml:space="preserve">
+    <value>reading network configuration...</value>
+  </data>
+  <data name="CheckingSignalLevelAndConnectionType" xml:space="preserve">
+    <value>Checking signal level and connection type...</value>
+  </data>
+  <data name="ReadingDeviceConfiguration" xml:space="preserve">
+    <value>reading device configuration...</value>
+  </data>
+  <data name="CheckContent_grid_column_ip_address" xml:space="preserve">
+    <value>IP address</value>
+  </data>
+  <data name="Button_ok_content" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="ConnectionEstablished" xml:space="preserve">
+    <value>Connection established.</value>
+  </data>
+  <data name="Attempt" xml:space="preserve">
+    <value>attempt #</value>
+  </data>
+  <data name="SendingData" xml:space="preserve">
+    <value>sending data:</value>
+  </data>
+  <data name="GettingData" xml:space="preserve">
+    <value>getting data:</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>pause between requests</value>
+  </data>
+  <data name="ConnectionParamsContent_label_netStrengthCheckInterval" xml:space="preserve">
+    <value>Signal level check interval, ms</value>
+  </data>
+</root>

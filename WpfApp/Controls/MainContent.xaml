@@ -1,0 +1,78 @@
+<UserControl
+    x:Class="TMP.Work.CommunicatorPSDTU.UI.Wpf.Controls.MainContent"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TMP.Work.CommunicatorPSDTU.UI.Wpf.Controls"
+    xmlns:local_controls="clr-namespace:TMP.Work.CommunicatorPSDTU.UI.Wpf.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xml:lang="en-US"
+    Loaded="UserControl_Loaded"
+    mc:Ignorable="d">
+    <Border>
+        <StackPanel>
+            <DockPanel>
+                <StackPanel DataContext="{Binding Settings}">
+                    <StackPanel Orientation="Horizontal">
+                        <Label Content="{Binding MainContent_device_ip_address, Source={StaticResource LocUiStrings}}" Style="{StaticResource infoLabelStyle}" />
+                        <Decorator Width="10" />
+                        <TextBox
+                            x:Name="txtIpAddres"
+                            MinWidth="140"
+                            HorizontalContentAlignment="Stretch"
+                            VerticalContentAlignment="Center"
+                            FontFamily="Lucida Console,Consolas">
+                            <TextBox.Text>
+                                <Binding Path="IpAddress" UpdateSourceTrigger="PropertyChanged">
+                                    <Binding.ValidationRules>
+                                        <DataErrorValidationRule />
+                                        <ExceptionValidationRule />
+                                    </Binding.ValidationRules>
+                                </Binding>
+                            </TextBox.Text>
+                        </TextBox>
+                    </StackPanel>
+                    <Border
+                        Margin="0,5,0,0"
+                        Padding="5"
+                        Background="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"
+                        CornerRadius="3"
+                        Visibility="{Binding ElementName=txtIpAddres, Path=(Validation.HasError), Converter={StaticResource BoolToVisibilityConverter}}">
+                        <TextBlock
+                            MaxWidth="250"
+                            FontStyle="Italic"
+                            FontWeight="Light"
+                            Foreground="{DynamicResource {x:Static SystemColors.HighlightTextBrushKey}}"
+                            TextWrapping="Wrap">
+                            <Run FontStyle="Normal" Text="⚠️" />
+                            <Decorator Width="5" />
+                            <Run Text="{Binding IpAddressValidationError, Mode=OneWay}" />
+                        </TextBlock>
+                    </Border>
+                </StackPanel>
+                <Decorator Width="10" />
+                <Button
+                    Padding="10,2"
+                    HorizontalAlignment="Stretch"
+                    VerticalAlignment="Stretch"
+                    Command="{Binding ConnectCommand}"
+                    Content="{Binding ConnectCommandHeader}"
+                    DockPanel.Dock="Right"
+                    IsDefault="True"
+                    Style="{DynamicResource AccentButtonStyle}" />
+            </DockPanel>
+            <Decorator Height="10" />
+            <TabControl IsEnabled="{Binding IsConnected}">
+                <TabItem Header="{Binding MainContent_tab_current_state, Source={StaticResource LocUiStrings}}" HeaderTemplate="{StaticResource TabItemHeaderTemplateWithExtraSpace}">
+                    <local_controls:CurrentState />
+                </TabItem>
+                <TabItem Header="{Binding MainContent_tab_network_config, Source={StaticResource LocUiStrings}}" HeaderTemplate="{StaticResource TabItemHeaderTemplateWithExtraSpace}">
+                    <local_controls:NetworkConfig />
+                </TabItem>
+                <TabItem Header="{Binding MainContent_tab_rs485_config, Source={StaticResource LocUiStrings}}" HeaderTemplate="{StaticResource TabItemHeaderTemplateWithExtraSpace}">
+                    <local_controls:Rs485Config />
+                </TabItem>
+            </TabControl>
+        </StackPanel>
+    </Border>
+</UserControl>

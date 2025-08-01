@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Main_window_title" xml:space="preserve">
+    <value>Pravierka kamunikataraŭ i kantrolieraŭ</value>
+  </data>
+  <data name="Main_window_description" xml:space="preserve">
+    <value>Heta ŭtylita pryznačana dlia čytannia i zmianiennia nastrojek kantrolieraŭ i kamunikataraŭ, što vyrabliajucca filijalam "PSDTU" RUP "Hrodnaenierha".</value>
+  </data>
+  <data name="Settings_tab_header" xml:space="preserve">
+    <value>Nalady pragramy</value>
+  </data>
+  <data name="Check_devices_tab_header" xml:space="preserve">
+    <value>Pravierka suviazi</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Trus Michail Piatrovič</value>
+  </data>
+  <data name="CheckContent_short_description_header" xml:space="preserve">
+    <value>Karotkaje apisannie</value>
+  </data>
+  <data name="CheckContent_short_description_text" xml:space="preserve">
+    <value>U hetym režymie možna apytać pieralik kantrolieraŭ ci kamunikataraŭ.
+Pieralik možna ŭstavić z bufiera abmienu. U bufiery pavinna być tablica z dvuma slupkami: 'Apisannie' i 'Ip adras'.</value>
+  </data>
+  <data name="CheckContent_expander_operations_header" xml:space="preserve">
+    <value>Apieracyi</value>
+  </data>
+  <data name="CheckContent_button_clear_list" xml:space="preserve">
+    <value>Ačyscić spis</value>
+  </data>
+  <data name="CheckContent_button_paste_from_clipboard" xml:space="preserve">
+    <value>Ustavić z bufiera abmienu</value>
+  </data>
+  <data name="CheckContent_button_copy_to_clipboard" xml:space="preserve">
+    <value>Skapijavać u bufier abmienu</value>
+  </data>
+  <data name="CheckContent_button_paste_from_excel" xml:space="preserve">
+    <value>Ustavić z fajla Excel</value>
+  </data>
+  <data name="CheckContent_button_copy_to_excel" xml:space="preserve">
+    <value>Zapisać vynik u fajl Excel</value>
+  </data>
+  <data name="CheckContent_button_setup_excel" xml:space="preserve">
+    <value>Naladzić paramietry fajla Excel</value>
+  </data>
+  <data name="CheckContent_grid_column_description" xml:space="preserve">
+    <value>Apisannie</value>
+  </data>
+  <data name="CheckContent_grid_column_device_type" xml:space="preserve">
+    <value>Typ prylady</value>
+  </data>
+  <data name="CheckContent_grid_column_signal_level" xml:space="preserve">
+    <value>Uzrovień sihnalu</value>
+  </data>
+  <data name="CheckContent_grid_column_net_mode" xml:space="preserve">
+    <value>Režym sietki</value>
+  </data>
+  <data name="CheckContent_grid_column_firmware_version" xml:space="preserve">
+    <value>Data PZ</value>
+  </data>
+  <data name="CheckContent_grid_column_firmware_date" xml:space="preserve">
+    <value>Viersija PZ</value>
+  </data>
+  <data name="CheckContent_grid_column_number_of_retries" xml:space="preserve">
+    <value>Koĺkasć sprob zlučennia</value>
+  </data>
+  <data name="ConnectionParamsContent_info" xml:space="preserve">
+    <value>Paramietry zlučennia</value>
+  </data>
+  <data name="ConnectionParamsContent_label_connection_timeout" xml:space="preserve">
+    <value>Čas čakannia zlučennia, siekund</value>
+  </data>
+  <data name="ConnectionParamsContent_label_response_timeout" xml:space="preserve">
+    <value>Čas čakannia adkazu, siekund</value>
+  </data>
+  <data name="ConnectionParamsContent_label_retries" xml:space="preserve">
+    <value>Sprob:</value>
+  </data>
+  <data name="ConnectionParamsContent_label_pause" xml:space="preserve">
+    <value>Paŭza pamiž sprobami, milisiekund</value>
+  </data>
+  <data name="ConnectionParamsContent_section_interface" xml:space="preserve">
+    <value>Interfiejs</value>
+  </data>
+  <data name="ConnectionParamsContent_label_use_fluent" xml:space="preserve">
+    <value>Vykarystoŭvać temu afarmliennia Fluent</value>
+  </data>
+  <data name="ConnectionParamsContent_label_language" xml:space="preserve">
+    <value>Mova interfiejsu</value>
+  </data>
+  <data name="CurrentState_label_type" xml:space="preserve">
+    <value>Typ:</value>
+  </data>
+  <data name="CurrentState_label_version" xml:space="preserve">
+    <value>viersija:</value>
+  </data>
+  <data name="CurrentState_label_from" xml:space="preserve">
+    <value>ad:</value>
+  </data>
+  <data name="CurrentState_current_mode" xml:space="preserve">
+    <value>Biahučy režym</value>
+  </data>
+  <data name="CurrentState_signal_level" xml:space="preserve">
+    <value>uzrovień sihnalu:</value>
+  </data>
+  <data name="CurrentState_db" xml:space="preserve">
+    <value>db</value>
+  </data>
+  <data name="CurrentState_label_subnet" xml:space="preserve">
+    <value>Padsietka</value>
+  </data>
+  <data name="CurrentState_label_net_range" xml:space="preserve">
+    <value>dyjapazon:</value>
+  </data>
+  <data name="CurrentState_label_net_priority" xml:space="preserve">
+    <value>pryjarytet:</value>
+  </data>
+  <data name="MainContent_device_ip_address" xml:space="preserve">
+    <value>IP-adras:</value>
+  </data>
+  <data name="MainContent_tab_current_state" xml:space="preserve">
+    <value>Stan</value>
+  </data>
+  <data name="MainContent_tab_network_config" xml:space="preserve">
+    <value>Nastrojki sietki</value>
+  </data>
+  <data name="MainContent_tab_rs485_config" xml:space="preserve">
+    <value>Nastrojki RS485</value>
+  </data>
+  <data name="Function_not_supported_or_no_data" xml:space="preserve">
+    <value>Funkcyja prylady nie padtrymlivajecca aĺbo atrymany nikoli nie adkaz ad prylady.</value>
+  </data>
+  <data name="Write_settings" xml:space="preserve">
+    <value>Zapisać paramietry ŭ pryladu</value>
+  </data>
+  <data name="NetworkConfig_label_apn" xml:space="preserve">
+    <value>Nazva punktu dostupu</value>
+  </data>
+  <data name="Max_field_length_16_chars" xml:space="preserve">
+    <value>Maksimaĺnaja daŭžynia polia – 16 simvala</value>
+  </data>
+  <data name="Max_field_length_32_chars" xml:space="preserve">
+    <value>Maksimaĺnaja daŭžynia polia – 32 simvala</value>
+  </data>
+  <data name="NetworkConfig_label_apn_user" xml:space="preserve">
+    <value>Imia karystaĺnika mabiĺnaj kropki dostupu</value>
+  </data>
+  <data name="NetworkConfig_label_apn_password" xml:space="preserve">
+    <value>Paroĺ mabiĺnaj kropki dostupu</value>
+  </data>
+  <data name="NetworkConfig_label_tcp_port" xml:space="preserve">
+    <value>TCP port</value>
+  </data>
+  <data name="NetworkConfig_tcp_port_tooltip" xml:space="preserve">
+    <value>(vykarystoŭvajecca dlia padlučennia da prylady). Maksimaĺnaje značennie - 65535.</value>
+  </data>
+  <data name="NetworkConfig_label_watchdog_timer" xml:space="preserve">
+    <value>Vartavy tajmier u chvilinach</value>
+  </data>
+  <data name="NetworkConfig_label_minutes" xml:space="preserve">
+    <value>chvilin</value>
+  </data>
+  <data name="Rs485Config_tooltip" xml:space="preserve">
+    <value>Nastrojki pasliadoŭnaha porta (RS485)</value>
+  </data>
+  <data name="Rs485Config_label_baudrate" xml:space="preserve">
+    <value>Chutkasć pieradačy danych</value>
+  </data>
+  <data name="Rs485Config_label_bits" xml:space="preserve">
+    <value>Koĺkasć bit dadzienych</value>
+  </data>
+  <data name="Rs485Config_label_parity" xml:space="preserve">
+    <value>Parytet</value>
+  </data>
+  <data name="Rs485Config_label_stop_bits" xml:space="preserve">
+    <value>Koĺkasć stopavych bit</value>
+  </data>
+  <data name="Device_tab_header" xml:space="preserve">
+    <value>Prylada</value>
+  </data>
+  <data name="ReadingVersion" xml:space="preserve">
+    <value>čytannie viersii ...</value>
+  </data>
+  <data name="IsWritingNewDeviceConfiguration" xml:space="preserve">
+    <value>zapis novaj kanfihuracyi prylady ...</value>
+  </data>
+  <data name="ReadingNetworkConfiguration" xml:space="preserve">
+    <value>čytannie kanfihuracyi sietki ...</value>
+  </data>
+  <data name="CheckingSignalLevelAndConnectionType" xml:space="preserve">
+    <value>pravierka ŭzroŭniu sihnalu i typu suviazi ...</value>
+  </data>
+  <data name="ReadingDeviceConfiguration" xml:space="preserve">
+    <value>čytannie kanfihuracyi prylady ...</value>
+  </data>
+  <data name="CheckContent_grid_column_ip_address" xml:space="preserve">
+    <value>IP-adras</value>
+  </data>
+  <data name="Button_ok_content" xml:space="preserve">
+    <value>Zrazumiela</value>
+  </data>
+  <data name="ConnectionEstablished" xml:space="preserve">
+    <value>Zlučennie ŭstaliavana.</value>
+  </data>
+  <data name="Attempt" xml:space="preserve">
+    <value>sproba №</value>
+  </data>
+  <data name="SendingData" xml:space="preserve">
+    <value>adpraŭka dadzienych:</value>
+  </data>
+  <data name="GettingData" xml:space="preserve">
+    <value>atrymannie dadzienych:</value>
+  </data>
+  <data name="Pause" xml:space="preserve">
+    <value>paŭza pamiž sprobami</value>
+  </data>
+  <data name="ConnectionParamsContent_label_netStrengthCheckInterval" xml:space="preserve">
+    <value>Interval pravierki ŭzroŭniu sihnalu, ms</value>
+  </data>
+</root>

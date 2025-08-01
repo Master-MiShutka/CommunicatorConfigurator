@@ -1,0 +1,47 @@
+<UserControl
+    x:Class="TMP.Work.CommunicatorPSDTU.UI.Wpf.Controls.SignalIndicator"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TMP.Work.CommunicatorPSDTU.UI.Wpf.Controls"
+    xmlns:local_converters="clr-namespace:TMP.Work.CommunicatorPSDTU.UI.Wpf.Converters"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    MinWidth="20"
+    MinHeight="6"
+    MaxWidth="150"
+    Margin="2"
+    HorizontalAlignment="Center"
+    VerticalAlignment="Stretch"
+    d:DesignHeight="30"
+    d:DesignWidth="100"
+    xml:lang="en-US"
+    Focusable="False"
+    IsTabStop="False"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style TargetType="Rectangle">
+            <Setter Property="StrokeThickness" Value="0.5" />
+        </Style>
+    </UserControl.Resources>
+    <ItemsControl ItemsSource="{Binding Bars, RelativeSource={RelativeSource AncestorType={x:Type local:SignalIndicator}}}">
+        <ItemsControl.ItemsPanel>
+            <ItemsPanelTemplate>
+                <StackPanel Orientation="Horizontal" />
+            </ItemsPanelTemplate>
+        </ItemsControl.ItemsPanel>
+        <ItemsControl.ItemTemplate>
+            <DataTemplate DataType="{x:Type local:BarItem}">
+                <Rectangle
+                    Width="{Binding Width}"
+                    Height="{Binding Height}"
+                    Margin="{Binding Margin}"
+                    VerticalAlignment="Bottom"
+                    Fill="{Binding Fill}"
+                    RadiusX="2"
+                    RadiusY="2"
+                    Stroke="{Binding StrokeBrush, RelativeSource={RelativeSource AncestorType={x:Type local:SignalIndicator}}}"
+                    StrokeThickness="0.5" />
+            </DataTemplate>
+        </ItemsControl.ItemTemplate>
+    </ItemsControl>
+</UserControl>

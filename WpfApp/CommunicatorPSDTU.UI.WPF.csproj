@@ -1,0 +1,83 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<TargetFramework>net10.0-windows</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<RootNamespace>TMP.Work.CommunicatorPSDTU.UI.Wpf</RootNamespace>
+		<AssemblyName>TMP.Work.CommunicatorPSDTU.UI.Wpf</AssemblyName>
+    <ApplicationIcon>app_icon.ico</ApplicationIcon>
+    <StartupObject>TMP.Work.CommunicatorPSDTU.UI.Wpf.App</StartupObject>
+		<UseWPF>true</UseWPF>
+    <Title>Программа для настройки контроллеров и коммуникаторов</Title>
+    <Product>$(Title)</Product>
+    <Description>$(Product)</Description>
+    <PublisherName>Трус Михаил Петрович</PublisherName>
+    <Company>TMP Devlabs</Company>
+    <Authors>Trus Mikhail</Authors>
+    <Version>1.1.0.0</Version>
+    <Description>$(Title)</Description>
+    <AssemblyVersion>$(Version)</AssemblyVersion>
+    <FileVersion>$(Version)</FileVersion>
+    <LangVersion>preview</LangVersion>
+    <ApplicationManifest>TMP.Work.CommunicatorPSDTU.UI.Wpf.manifest</ApplicationManifest>
+  </PropertyGroup>
+	<ItemGroup>
+    <PackageReference Include="nulastudio.NetBeauty" Version="2.1.5" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Microsoft.Extensions.Logging" Version="9.0.6" />
+		<PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+    <PackageReference Include="PropertyChanged.SourceGenerator" Version="1.1.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+	</ItemGroup>
+  <PropertyGroup>
+    <BeautySharedRuntimeMode>False</BeautySharedRuntimeMode>
+    <!-- beauty into sub-directory, default is libs, quote with "" if contains space  -->
+    <BeautyLibsDir Condition="$(BeautySharedRuntimeMode) == 'True'">../libraries</BeautyLibsDir>
+    <BeautyLibsDir Condition="$(BeautySharedRuntimeMode) != 'True'">./libraries</BeautyLibsDir>
+    <!-- dlls that you don't want to be moved or can not be moved -->
+    <!-- <BeautyExcludes>dll1.dll;lib*;...</BeautyExcludes> -->
+    <!-- dlls that end users never needed, so hide them -->
+    <!-- <BeautyHiddens>hostfxr;hostpolicy;*.deps.json;*.runtimeconfig*.json</BeautyHiddens> -->
+    <!-- set to True if you want to disable -->
+    <DisableBeauty>False</DisableBeauty>
+    <!-- set to False if you want to beauty on build -->
+    <BeautyOnPublishOnly>True</BeautyOnPublishOnly>
+    <!-- DO NOT TOUCH THIS OPTION -->
+    <BeautyNoRuntimeInfo>False</BeautyNoRuntimeInfo>
+    <!-- valid values: auto|with|without -->
+    <BeautyNBLoaderVerPolicy>auto</BeautyNBLoaderVerPolicy>
+    <!-- set to True if you want to allow 3rd debuggers(like dnSpy) debugs the app -->
+    <BeautyEnableDebugging>False</BeautyEnableDebugging>
+    <!-- the patch can reduce the file count -->
+    <!-- set to False if you want to disable -->
+    <!-- SCD Mode Feature Only -->
+    <BeautyUsePatch>True</BeautyUsePatch>
+    <!-- App Entry Dll = BeautyDir + BeautyAppHostDir + BeautyAppHostEntry -->
+    <!-- see https://github.com/nulastudio/NetBeauty2#customize-apphost for more details -->
+    <!-- relative path based on AppHostDir -->
+    <!-- .NET Core Non Single-File Only -->
+    <!-- <BeautyAppHostEntry>bin/MyApp.dll</BeautyAppHostEntry> -->
+    <!-- relative path based on BeautyDir -->
+    <!-- .NET Core Non Single-File Only -->
+    <!-- <BeautyAppHostDir>..</BeautyAppHostDir> -->
+    <!-- <BeautyAfterTasks></BeautyAfterTasks> -->
+    <!-- valid values: Error|Detail|Info -->
+    <BeautyLogLevel>Info</BeautyLogLevel>
+    <!-- set to a repo mirror if you have troble in connecting github -->
+    <!-- <BeautyGitCDN>https://gitee.com/liesauer/HostFXRPatcher</BeautyGitCDN> -->
+    <!-- <BeautyGitTree>master</BeautyGitTree> -->
+  </PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\CommunicatorShared\CommunicatorCommon.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+    <Resource Include="app_icon.ico">
+      <Localizable>False</Localizable>
+    </Resource>
+	</ItemGroup>
+
+</Project>

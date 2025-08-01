@@ -1,0 +1,199 @@
+<UserControl
+    x:Class="TMP.Work.CommunicatorPSDTU.UI.Wpf.Controls.ConnectionParamsContent"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TMP.Work.CommunicatorPSDTU.UI.Wpf.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:DesignWidth="600"
+    xml:lang="en-US"
+    DataContext="{Binding Settings}"
+    mc:Ignorable="d">
+    <StackPanel>
+        <!--  net  -->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="10px" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <!--  0  -->
+            <TextBlock
+                Grid.ColumnSpan="3"
+                Margin="0,5"
+                Padding="5"
+                Background="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}"
+                FontWeight="Bold"
+                Text="{Binding ConnectionParamsContent_info, Source={StaticResource LocUiStrings}}"
+                TextAlignment="Center" />
+            <!--  1  -->
+            <Label
+                Grid.Row="1"
+                Content="{Binding ConnectionParamsContent_label_connection_timeout, Source={StaticResource LocUiStrings}}"
+                Style="{StaticResource infoLabelStyle}" />
+            <TextBox
+                Grid.Row="1"
+                Grid.Column="2"
+                MinWidth="50"
+                Margin="0,5"
+                HorizontalAlignment="Stretch"
+                VerticalContentAlignment="Center">
+                <TextBox.Text>
+                    <Binding
+                        FallbackValue="30"
+                        Path="ConnectionWaitTimeout"
+                        UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <!--  2  -->
+            <Label
+                Grid.Row="2"
+                Content="{Binding ConnectionParamsContent_label_response_timeout, Source={StaticResource LocUiStrings}}"
+                Style="{StaticResource infoLabelStyle}" />
+            <TextBox
+                Grid.Row="2"
+                Grid.Column="2"
+                MinWidth="50"
+                Margin="0,5"
+                HorizontalAlignment="Stretch"
+                VerticalContentAlignment="Center">
+                <TextBox.Text>
+                    <Binding
+                        FallbackValue="30"
+                        Path="SendOrReceiveTimeout"
+                        UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <!--  3  -->
+            <StackPanel Grid.Row="3" Orientation="Horizontal">
+                <Label Content="{Binding ConnectionParamsContent_label_retries, Source={StaticResource LocUiStrings}}" Style="{StaticResource infoLabelStyle}" />
+                <Decorator Width="5" />
+                <TextBlock Style="{StaticResource valueTextStyle}" Text="{Binding RetryCount, FallbackValue=1}" />
+            </StackPanel>
+            <Slider
+                Grid.Row="3"
+                Grid.Column="2"
+                MinWidth="100"
+                Margin="0,5"
+                VerticalAlignment="Center"
+                Maximum="15"
+                Minimum="1"
+                TickPlacement="TopLeft"
+                Value="{Binding RetryCount}" />
+
+            <!--  4  -->
+            <Label
+                Grid.Row="4"
+                Content="{Binding ConnectionParamsContent_label_pause, Source={StaticResource LocUiStrings}}"
+                Style="{StaticResource infoLabelStyle}" />
+            <TextBox
+                Grid.Row="4"
+                Grid.Column="2"
+                MinWidth="50"
+                Margin="0,5"
+                HorizontalAlignment="Stretch"
+                VerticalContentAlignment="Center">
+                <TextBox.Text>
+                    <Binding
+                        FallbackValue="1000"
+                        Path="DelayBetweenRetries"
+                        UpdateSourceTrigger="PropertyChanged">
+                        <Binding.ValidationRules>
+                            <DataErrorValidationRule />
+                            <ExceptionValidationRule />
+                        </Binding.ValidationRules>
+                    </Binding>
+                </TextBox.Text>
+            </TextBox>
+
+            <!--  5  -->
+            <StackPanel Grid.Row="5" Orientation="Horizontal">
+                <Label Content="{Binding ConnectionParamsContent_label_netStrengthCheckInterval, Source={StaticResource LocUiStrings}}" Style="{StaticResource infoLabelStyle}" />
+                <Decorator Width="5" />
+                <TextBlock
+                    MinWidth="50"
+                    Style="{StaticResource valueTextStyle}"
+                    Text="{Binding NetStrengthCheckInterval, FallbackValue=1000}" />
+            </StackPanel>
+            <Slider
+                Grid.Row="5"
+                Grid.Column="2"
+                MinWidth="100"
+                Margin="0,5"
+                VerticalAlignment="Center"
+                IsSnapToTickEnabled="True"
+                LargeChange="1000"
+                Maximum="10000"
+                Minimum="500"
+                SmallChange="100"
+                TickFrequency="500"
+                TickPlacement="TopLeft"
+                Value="{Binding NetStrengthCheckInterval}" />
+        </Grid>
+        <Decorator Height="15" />
+        <!--  ui  -->
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="10px" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <!--  0  -->
+            <TextBlock
+                Grid.Row="0"
+                Grid.ColumnSpan="3"
+                Margin="0,5"
+                Padding="5"
+                Background="{DynamicResource {x:Static SystemColors.AppWorkspaceBrushKey}}"
+                FontWeight="Bold"
+                Text="{Binding ConnectionParamsContent_section_interface, Source={StaticResource LocUiStrings}}"
+                TextAlignment="Center" />
+            <!--  1  -->
+            <CheckBox
+                Grid.Row="1"
+                Grid.ColumnSpan="3"
+                Margin="0,5"
+                Content="{Binding ConnectionParamsContent_label_use_fluent, Source={StaticResource LocUiStrings}}"
+                IsChecked="{Binding AppUseFluentTheme}" />
+            <!--  2  -->
+            <Label
+                Grid.Row="2"
+                Content="{Binding ConnectionParamsContent_label_language, Source={StaticResource LocUiStrings}}"
+                Style="{StaticResource infoLabelStyle}" />
+            <ComboBox
+                Grid.Row="2"
+                Grid.Column="2"
+                Margin="0,5"
+                VerticalContentAlignment="Center"
+                IsSynchronizedWithCurrentItem="True"
+                ItemTemplate="{StaticResource LanguagesDataTemplate}"
+                ItemsSource="{Binding Source={StaticResource CultureResourcesDS}, Path=SupportedCultures}"
+                SelectedValue="{Binding SelectedCultureInfo}" />
+        </Grid>
+    </StackPanel>
+</UserControl>

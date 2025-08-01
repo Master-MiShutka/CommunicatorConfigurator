@@ -1,0 +1,189 @@
+<UserControl
+    x:Class="TMP.Work.CommunicatorPSDTU.UI.Wpf.Controls.CheckContent"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TMP.Work.CommunicatorPSDTU.UI.Wpf.Controls"
+    xmlns:local_controls="clr-namespace:TMP.Work.CommunicatorPSDTU.UI.Wpf.Controls"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    d:Height="300"
+    d:Width="800"
+    xml:lang="en-US"
+    mc:Ignorable="d">
+    <DockPanel LastChildFill="True">
+        <StackPanel DockPanel.Dock="Top">
+            <Expander DockPanel.Dock="Top" Header="{Binding CheckContent_short_description_header, Source={StaticResource LocUiStrings}}">
+                <Border
+                    MinHeight="50"
+                    Margin="-8"
+                    TextElement.FontSize="14">
+                    <TextBlock
+                        Padding="4"
+                        Text="{Binding CheckContent_short_description_text, Source={StaticResource LocUiStrings}}"
+                        TextAlignment="Left"
+                        TextWrapping="Wrap" />
+                </Border>
+            </Expander>
+            <Decorator Height="5" />
+            <Expander Header="{Binding CheckContent_expander_operations_header, Source={StaticResource LocUiStrings}}">
+                <StackPanel
+                    Margin="4"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical" TextBlock.TextAlignment="Center">
+                        <Button
+                            Padding="10,5"
+                            Command="{Binding ClearListCommand}"
+                            Content="{Binding CheckContent_button_clear_list, Source={StaticResource LocUiStrings}}" />
+                        <Decorator Width="5" Margin="2" />
+                        <Button
+                            Padding="10,5"
+                            Command="{Binding StartCheckDevicesCommand}"
+                            Content="{Binding StartCheckDevicesCommandHeader}" />
+                    </StackPanel>
+                    <Decorator Width="10" />
+                    <StackPanel Orientation="Vertical">
+                        <Button
+                            Padding="10,5"
+                            Command="{Binding PasteListFromClipboardCommand}"
+                            Content="{Binding CheckContent_button_paste_from_clipboard, Source={StaticResource LocUiStrings}}" />
+                        <Decorator Width="5" Margin="2" />
+                        <Button
+                            Padding="10,5"
+                            Command="{Binding CopyResultToClipboardCommand}"
+                            Content="{Binding CheckContent_button_copy_to_clipboard, Source={StaticResource LocUiStrings}}" />
+                    </StackPanel>
+                    <Decorator Width="10" />
+                    <StackPanel Orientation="Vertical">
+                        <Button
+                            Padding="10,5"
+                            Command="{Binding PasteListFromFileCommand}"
+                            Content="{Binding CheckContent_button_paste_from_excel, Source={StaticResource LocUiStrings}}" />
+                        <Decorator Width="5" Margin="2" />
+                        <Button
+                            Padding="10,5"
+                            Command="{Binding WriteResultToFileCommand}"
+                            Content="{Binding CheckContent_button_copy_to_excel, Source={StaticResource LocUiStrings}}" />
+                        <Decorator Width="5" Margin="2" />
+                        <Button
+                            Padding="10,5"
+                            Command="{Binding SetupExcelCommand}"
+                            Content="{Binding CheckContent_button_setup_excel, Source={StaticResource LocUiStrings}}" />
+                    </StackPanel>
+                </StackPanel>
+            </Expander>
+            <Decorator Height="5" />
+        </StackPanel>
+        <DataGrid
+            AlternationCount="2"
+            AutoGenerateColumns="False"
+            BorderBrush="{DynamicResource {x:Static SystemColors.InactiveBorderBrushKey}}"
+            BorderThickness="0.5"
+            IsReadOnly="True"
+            ItemsSource="{Binding Devices}"
+            SelectionMode="Single">
+            <DataGrid.Resources>
+                <Style x:Key="DataGridCellCentered" TargetType="DataGridCell">
+                    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+                </Style>
+                <Style x:Key="DataGridCellLeftAlignment" TargetType="DataGridCell">
+                    <Setter Property="TextBlock.TextAlignment" Value="Left" />
+                </Style>
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    MinWidth="50"
+                    Binding="{Binding Status}"
+                    Header="#" />
+                <DataGridTextColumn
+                    MinWidth="200"
+                    Binding="{Binding Name}"
+                    CellStyle="{StaticResource DataGridCellLeftAlignment}"
+                    Header="{Binding CheckContent_grid_column_description, Source={StaticResource LocUiStrings}}" />
+                <DataGridTextColumn
+                    Width="130"
+                    Binding="{Binding IpAddress}"
+                    CellStyle="{StaticResource DataGridCellLeftAlignment}"
+                    Header="{Binding CheckContent_grid_column_ip_address, Source={StaticResource LocUiStrings}}"
+                    TextElement.FontFamily="Lucida Console,Consolas" />
+                <DataGridTextColumn
+                    MinWidth="200"
+                    Binding="{Binding DeviceName}"
+                    Header="{Binding CheckContent_grid_column_device_type, Source={StaticResource LocUiStrings}}" />
+                <DataGridTemplateColumn Width="80" Header="{Binding CheckContent_grid_column_signal_level, Source={StaticResource LocUiStrings}}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock MinWidth="20" Text="{Binding NetLevel, Mode=OneWay}" />
+                                <Decorator Width="5" />
+                                <local_controls:SignalIndicator
+                                    Width="40"
+                                    Level="{Binding NetLevel, Mode=OneWay}"
+                                    StrokeBrush="{DynamicResource {x:Static SystemColors.AccentColorDark2BrushKey}}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn
+                    Width="70"
+                    Binding="{Binding NetMode}"
+                    Header="{Binding CheckContent_grid_column_net_mode, Source={StaticResource LocUiStrings}}" />
+                <DataGridTextColumn
+                    Width="70"
+                    Binding="{Binding DeviceFirmwareVersion}"
+                    Header="{Binding CheckContent_grid_column_firmware_version, Source={StaticResource LocUiStrings}}" />
+                <DataGridTextColumn
+                    Width="80"
+                    Binding="{Binding DeviceFirmwareDate}"
+                    Header="{Binding CheckContent_grid_column_firmware_date, Source={StaticResource LocUiStrings}}" />
+                <DataGridTemplateColumn Width="35" Header="#">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding NumberOfConnectionAttemps}" ToolTip="{Binding CheckContent_grid_column_number_of_retries, Source={StaticResource LocUiStrings}}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <!--<ListView x:Uid="CheckContent_dockPanel_listView_1"
+            AlternationCount="2"
+            BorderBrush="{DynamicResource {x:Static SystemColors.InactiveBorderBrushKey}}"
+            BorderThickness="1"
+            ItemsSource="{Binding Devices}"
+            Visibility="Collapsed">
+            <ListView.View>
+                <GridView AllowsColumnReorder="true">
+                    <GridView.Columns>
+                        <GridViewColumn x:Uid="GridViewColumn_name" DisplayMemberBinding="{Binding Name}" Header="Описание" />
+                        <GridViewColumn x:Uid="GridViewColumn_ipAddress" DisplayMemberBinding="{Binding IpAddress}" Header="Ip адрес" />
+                        <GridViewColumn x:Uid="GridViewColumn_deviceName" DisplayMemberBinding="{Binding DeviceName}" Header="Тип устройства" />
+                        <GridViewColumn x:Uid="GridViewColumn_netLevel" Width="80" Header="Уровень сигнала">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <local_controls:SignalIndicator
+                                        Width="60"
+                                        Height="15"
+                                        Level="{Binding NetLevel, Mode=OneWay}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn x:Uid="GridViewColumn_netMode"
+                            Width="50"
+                            DisplayMemberBinding="{Binding NetMode}"
+                            Header="Режим сети" />
+                        <GridViewColumn x:Uid="GridViewColumn_fwVersion"
+                            Width="50"
+                            DisplayMemberBinding="{Binding DeviceFirmwareVersion}"
+                            Header="Версия ПО" />
+                        <GridViewColumn x:Uid="GridViewColumn_fwDate"
+                            Width="60"
+                            DisplayMemberBinding="{Binding DeviceFirmwareDate}"
+                            Header="Дата ПО" />
+                        <GridViewColumn x:Uid="GridViewColumn_numberOfConAttemps"  DisplayMemberBinding="{Binding NumberOfConnectionAttemps}" Header="Кол-во попыток соединения" />
+                    </GridView.Columns>
+                </GridView>
+            </ListView.View>
+        </ListView>-->
+
+    </DockPanel>
+</UserControl>

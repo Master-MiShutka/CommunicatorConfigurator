@@ -1,0 +1,166 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:cultures="clr-namespace:TMP.Work.CommunicatorPSDTU.Common.Resources;assembly=TMP.Work.CommunicatorPSDTU.Common"
+    xmlns:local="clr-namespace:TMP.Work.CommunicatorPSDTU.UI.Wpf"
+    xmlns:local_converters="clr-namespace:TMP.Work.CommunicatorPSDTU.UI.Wpf.Converters"
+    xmlns:view_model="clr-namespace:TMP.Work.CommunicatorPSDTU.Common.ViewModels;assembly=TMP.Work.CommunicatorPSDTU.Common"
+    xml:lang="en-US">
+    <BitmapImage x:Key="AppIcon" UriSource="/app_icon.ico" />
+
+    <BooleanToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+
+    <!--
+        Resources ODP contains the current instance of the TMP.Work.CommunicatorPSDTU.Common.Resources.UI_strings class.
+        Used in bindings to get localized strings and automatic updates when the culture is updated
+    -->
+    <ObjectDataProvider
+        x:Key="LocUiStrings"
+        MethodName="GetResourceUIStringsInstance"
+        ObjectType="{x:Type cultures:CultureResources}" />
+
+    <!--  CultureResources ODP provides access to list of currently available cultures  -->
+    <ObjectDataProvider x:Key="CultureResourcesDS" ObjectType="{x:Type cultures:CultureResources}" />
+
+    <Style BasedOn="{StaticResource {x:Type TextBlock}}" TargetType="TextBlock">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+    </Style>
+
+    <Style
+        x:Key="infoLabelStyle"
+        BasedOn="{StaticResource {x:Type Label}}"
+        TargetType="Label">
+        <Setter Property="FontStyle" Value="Italic" />
+        <Setter Property="FontWeight" Value="Light" />
+        <Setter Property="Margin" Value="0,5" />
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+    </Style>
+
+    <Style
+        x:Key="infoTextStyle"
+        BasedOn="{StaticResource {x:Type TextBlock}}"
+        TargetType="TextBlock">
+        <Setter Property="FontStyle" Value="Italic" />
+        <Setter Property="FontWeight" Value="Light" />
+        <Setter Property="Margin" Value="0,5" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style
+        x:Key="valueTextStyle"
+        BasedOn="{StaticResource {x:Type TextBlock}}"
+        TargetType="TextBlock">
+        <Setter Property="FontStyle" Value="Normal" />
+        <Setter Property="FontWeight" Value="Medium" />
+        <Setter Property="TextWrapping" Value="Wrap" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Margin" Value="0,5" />
+    </Style>
+
+    <Style x:Key="valueRunStyle" TargetType="Run">
+        <Setter Property="FontStyle" Value="Normal" />
+        <Setter Property="FontWeight" Value="Medium" />
+    </Style>
+
+    <Style x:Key="BorderForGroups" TargetType="Border">
+        <Setter Property="Padding" Value="2" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="{DynamicResource {x:Static SystemColors.AccentColorDark2BrushKey}}" />
+        <Setter Property="CornerRadius" Value="3" />
+    </Style>
+
+    <local_converters:BorderGapMaskConverter x:Key="BorderGapMaskConverter" />
+
+    <ControlTemplate x:Key="GroupBoxWithCenterHeaderTemplate" TargetType="{x:Type GroupBox}">
+        <Grid SnapsToDevicePixels="true">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="6" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="6" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="6" />
+            </Grid.RowDefinitions>
+            <Border
+                Grid.Row="1"
+                Grid.RowSpan="3"
+                Grid.Column="0"
+                Grid.ColumnSpan="5"
+                Background="Transparent"
+                CornerRadius="4" />
+            <Border
+                Grid.Row="1"
+                Grid.RowSpan="3"
+                Grid.ColumnSpan="5"
+                BorderBrush="{DynamicResource {x:Static SystemColors.AccentColorDark2BrushKey}}"
+                BorderThickness="0"
+                CornerRadius="4">
+                <Border.OpacityMask>
+                    <MultiBinding Converter="{StaticResource BorderGapMaskConverter}" ConverterParameter="7">
+                        <Binding ElementName="Header" Path="ActualWidth" />
+                        <Binding Path="ActualWidth" RelativeSource="{RelativeSource Mode=Self}" />
+                        <Binding Path="ActualHeight" RelativeSource="{RelativeSource Mode=Self}" />
+                    </MultiBinding>
+                </Border.OpacityMask>
+                <Border
+                    BorderBrush="{DynamicResource {x:Static SystemColors.AccentColorDark3BrushKey}}"
+                    BorderThickness="{TemplateBinding BorderThickness}"
+                    CornerRadius="3">
+                    <Border
+                        BorderBrush="{DynamicResource {x:Static SystemColors.AccentColorDark2BrushKey}}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="2" />
+                </Border>
+            </Border>
+            <Border
+                x:Name="Header"
+                Grid.Row="0"
+                Grid.RowSpan="2"
+                Grid.Column="2"
+                Padding="3,1,3,0">
+                <ContentPresenter
+                    ContentSource="Header"
+                    RecognizesAccessKey="True"
+                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                    TextElement.Foreground="{DynamicResource {x:Static SystemColors.AccentColorBrushKey}}" />
+            </Border>
+            <ContentPresenter
+                Grid.Row="2"
+                Grid.Column="1"
+                Grid.ColumnSpan="3"
+                Margin="{TemplateBinding Padding}"
+                SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+        </Grid>
+    </ControlTemplate>
+
+    <Style x:Key="dotedSeparator" TargetType="{x:Type Separator}">
+        <Setter Property="Margin" Value="5,0" />
+        <Setter Property="HorizontalAlignment" Value="Center" />
+        <Setter Property="VerticalAlignment" Value="Stretch" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Separator}">
+                    <Rectangle
+                        Height="{TemplateBinding Height}"
+                        Stroke="{DynamicResource {x:Static SystemColors.ActiveBorderBrushKey}}"
+                        StrokeDashArray="2 2" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style BasedOn="{StaticResource {x:Type GroupBox}}" TargetType="GroupBox">
+        <Setter Property="Padding" Value="5" />
+    </Style>
+
+</ResourceDictionary>

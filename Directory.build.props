@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+
+    <!-- Project properties -->
+    <PropertyGroup>
+        <Company>TMP Devlabs</Company>
+        <Authors>Trus Mikhail</Authors>
+        <Copyright>Copyright © 2017 - $([System.DateTime]::Today.ToString(yyyy)) Trus Mikhail Petrovich</Copyright>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+
+        <TargetNetCoreFramework>net9.0-windows</TargetNetCoreFramework>
+        <AppsTargetFramework>net9.0-windows</AppsTargetFramework>
+        <TargetFramework Condition="'$(TargetFramework)'==''">$(AppsTargetFramework)</TargetFramework>
+        <WindowsLibraryTargetFramework>$(AppsTargetFramework)</WindowsLibraryTargetFramework>
+        <LibraryTargetFramework>netstandard2.1</LibraryTargetFramework>
+    </PropertyGroup>
+
+  <PropertyGroup>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <RunAnalyzersDuringBuild>true</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>true</RunAnalyzersDuringLiveAnalysis>
+    <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+    <CodeAnalysisTreatWarningsAsErrors>true</CodeAnalysisTreatWarningsAsErrors>
+
+    <ReportAnalyzer>true</ReportAnalyzer>
+    <AnalysisMode>Default</AnalysisMode>
+    <EnableNETAnalyzers>true</EnableNETAnalyzers>
+    
+    <AnalysisLevel>latest</AnalysisLevel>
+    <LangVersion>preview</LangVersion>
+
+  </PropertyGroup>
+
+  <ItemGroup>
+    <GlobalAnalyzerConfigFiles Include="$(MSBuildThisFileDirectory)\global_analyzer.globalconfig" />
+  </ItemGroup>
+    
+    <!-- Paths -->
+    <!-- https://learn.microsoft.com/en-us/dotnet/core/sdk/artifacts-output -->
+    <PropertyGroup>
+      <UseArtifactsOutput>true</UseArtifactsOutput>
+      <ArtifactsPath>$(MSBuildThisFileDirectory)artifacts</ArtifactsPath>
+    </PropertyGroup>    
+
+  <PropertyGroup>
+    <SourceRevisionId>build$([System.DateTime]::UtcNow.ToString("dd-MM-yyyy THH:mm:ss:fffZ"))</SourceRevisionId>
+  </PropertyGroup>
+
+  <!-- ItemGroup>
+        <None Remove="**\*.png;**\*.jpg;**\*.ico;**\*.ttf" />
+        <Resource Include="**\*.png;**\*.jpg;**\*.ico;**\*.ttf" />
+    </ItemGroup -->
+    
+    <ItemGroup>
+        <Compile Include="$(MSBuildThisFileDirectory)\GlobalAssemblyInfo.cs">
+            <Link>Properties\GlobalAssemblyInfo.cs</Link>
+        </Compile>
+    </ItemGroup>    
+
+</Project>

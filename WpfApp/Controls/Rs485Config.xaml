@@ -1,0 +1,87 @@
+<UserControl
+    x:Class="TMP.Work.CommunicatorPSDTU.UI.Wpf.Controls.Rs485Config"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TMP.Work.CommunicatorPSDTU.UI.Wpf.Controls"
+    xmlns:local_converters="clr-namespace:TMP.Work.CommunicatorPSDTU.UI.Wpf.Converters"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xml:lang="en-US"
+    ToolTip="{Binding Rs485Config_tooltip, Source={StaticResource LocUiStrings}}"
+    mc:Ignorable="d">
+    <UserControl.Resources>
+        <local_converters:EnumBindingConverter x:Key="EnumBindingConverter" />
+        <local_converters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityConverter" />
+        <local_converters:ObjectToVisibilityConverter x:Key="ObjectToVisibilityReConverter" IsNegative="True" />
+    </UserControl.Resources>
+    <Grid>
+        <TextBlock
+            Padding="10"
+            Text="{Binding Function_not_supported_or_no_data, Source={StaticResource LocUiStrings}}"
+            TextAlignment="Center"
+            Visibility="{Binding Path=NewRs485Config, Converter={StaticResource ObjectToVisibilityConverter}}" />
+        <!--    -->
+        <DockPanel Visibility="{Binding Path=NewRs485Config, Converter={StaticResource ObjectToVisibilityReConverter}}">
+            <Button
+                Margin="0,10"
+                Padding="20,5"
+                HorizontalAlignment="Center"
+                Command="{Binding SaveDeviceConfigCommand}"
+                Content="{Binding Write_settings, Source={StaticResource LocUiStrings}}"
+                DockPanel.Dock="Bottom" />
+            <Grid DataContext="{Binding NewRs485Config}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10px" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <!--  1  -->
+                <Label
+                    Grid.Row="0"
+                    Content="{Binding Rs485Config_label_baudrate, Source={StaticResource LocUiStrings}}"
+                    Style="{StaticResource infoLabelStyle}" />
+                <ComboBox
+                    Grid.Row="1"
+                    ItemsSource="{Binding Baudrate, Converter={local_converters:EnumBindingConverter}}"
+                    SelectedItem="{Binding Baudrate, Converter={local_converters:EnumBindingConverter}}" />
+                <!--  2  -->
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Content="{Binding Rs485Config_label_bits, Source={StaticResource LocUiStrings}}"
+                    Style="{StaticResource infoLabelStyle}" />
+                <ComboBox
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    ItemsSource="{Binding BitsCount, Converter={local_converters:EnumBindingConverter}}"
+                    SelectedItem="{Binding BitsCount, Converter={local_converters:EnumBindingConverter}}" />
+                <!--  3  -->
+                <Label
+                    Grid.Row="2"
+                    Content="{Binding Rs485Config_label_parity, Source={StaticResource LocUiStrings}}"
+                    Style="{StaticResource infoLabelStyle}" />
+                <ComboBox
+                    Grid.Row="3"
+                    ItemsSource="{Binding Parity, Converter={local_converters:EnumBindingConverter}}"
+                    SelectedItem="{Binding Parity, Converter={local_converters:EnumBindingConverter}}" />
+                <!--  4  -->
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Content="{Binding Rs485Config_label_stop_bits, Source={StaticResource LocUiStrings}}"
+                    Style="{StaticResource infoLabelStyle}" />
+                <ComboBox
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    ItemsSource="{Binding StopBitsCount, Converter={local_converters:EnumBindingConverter}}"
+                    SelectedItem="{Binding StopBitsCount, Converter={local_converters:EnumBindingConverter}}" />
+            </Grid>
+        </DockPanel>
+    </Grid>
+</UserControl>

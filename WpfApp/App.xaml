@@ -1,0 +1,19 @@
+<Application
+    x:Class="TMP.Work.CommunicatorPSDTU.UI.Wpf.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xml:lang="en-US">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!--  ResourceDictionary Source="pack://application:,,,/PresentationFramework.Fluent;component/Themes/Fluent.xaml" /  -->
+
+                <!--  ResourceDictionary Source="pack://application:,,,/TMP.Work.CommunicatorPSDTU.Common;component/data_providers.xaml" /  -->
+                <ResourceDictionary Source="/AppResources.xaml" />
+                <ResourceDictionary Source="/AppDataTemplates.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+
+    </Application.Resources>
+</Application>

@@ -1,0 +1,166 @@
+<UserControl
+    x:Class="TMP.Work.CommunicatorPSDTU.UI.Wpf.Controls.NetworkConfig"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Interactions="http://schemas.microsoft.com/xaml/behaviors"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:TMP.Work.CommunicatorPSDTU.UI.Wpf.Controls"
+    xmlns:local_behaviors="clr-namespace:TMP.Work.CommunicatorPSDTU.UI.Wpf.Behaviors"
+    xmlns:local_controls="clr-namespace:TMP.Work.CommunicatorPSDTU.UI.Wpf.Controls"
+    xmlns:local_converters="clr-namespace:TMP.Work.CommunicatorPSDTU.UI.Wpf.Converters"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xml:lang="en-US"
+    mc:Ignorable="d">
+    <Grid>
+        <TextBlock
+            Padding="10"
+            Text="{Binding Function_not_supported_or_no_data, Source={StaticResource LocUiStrings}}"
+            TextAlignment="Center"
+            Visibility="{Binding Path=NewDeviceConfig, Converter={StaticResource ObjectToVisibilityConverter}}" />
+        <!--    -->
+        <DockPanel Visibility="{Binding Path=NewDeviceConfig, Converter={StaticResource ObjectToVisibilityReConverter}}">
+            <Button
+                Margin="0,10"
+                Padding="20,5"
+                HorizontalAlignment="Center"
+                Command="{Binding SaveDeviceConfigCommand}"
+                Content="{Binding Write_settings, Source={StaticResource LocUiStrings}}"
+                DockPanel.Dock="Bottom" />
+            <Grid DataContext="{Binding NewDeviceConfig}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="10px" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" MinHeight="32" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" MinHeight="32" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" MinHeight="32" />
+                </Grid.RowDefinitions>
+                <!--    -->
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Content="{Binding NetworkConfig_label_apn, Source={StaticResource LocUiStrings}}"
+                    Style="{StaticResource infoLabelStyle}" />
+                <TextBox
+                    Grid.Row="1"
+                    Grid.Column="0"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Center"
+                    ToolTip="{Binding Max_field_length_32_chars, Source={StaticResource LocUiStrings}}">
+                    <TextBox.Text>
+                        <Binding
+                            Path="Apn"
+                            UpdateSourceTrigger="PropertyChanged"
+                            ValidatesOnDataErrors="True">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule />
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                    <Interactions:Interaction.Behaviors>
+                        <local_behaviors:RestrictStringInputBehavior />
+                    </Interactions:Interaction.Behaviors>
+                </TextBox>
+                <!--    -->
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    Content="{Binding NetworkConfig_label_apn_user, Source={StaticResource LocUiStrings}}"
+                    Style="{StaticResource infoLabelStyle}" />
+                <TextBox
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Center"
+                    ToolTip="{Binding Max_field_length_16_chars, Source={StaticResource LocUiStrings}}">
+                    <TextBox.Text>
+                        <Binding Path="Login" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule />
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                    <Interactions:Interaction.Behaviors>
+                        <local_behaviors:RestrictStringInputBehavior />
+                    </Interactions:Interaction.Behaviors>
+                </TextBox>
+                <!--    -->
+                <Label
+                    Grid.Row="2"
+                    Grid.Column="2"
+                    Content="{Binding NetworkConfig_label_apn_password, Source={StaticResource LocUiStrings}}"
+                    Style="{StaticResource infoLabelStyle}" />
+                <TextBox
+                    Grid.Row="3"
+                    Grid.Column="2"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Center"
+                    ToolTip="{Binding Max_field_length_16_chars, Source={StaticResource LocUiStrings}}">
+                    <TextBox.Text>
+                        <Binding Path="Password" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule />
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                    <Interactions:Interaction.Behaviors>
+                        <local_behaviors:RestrictStringInputBehavior />
+                    </Interactions:Interaction.Behaviors>
+                </TextBox>
+                <!--    -->
+                <Label
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    Content="{Binding NetworkConfig_label_tcp_port, Source={StaticResource LocUiStrings}}"
+                    Style="{StaticResource infoLabelStyle}" />
+                <TextBox
+                    Grid.Row="1"
+                    Grid.Column="2"
+                    HorizontalContentAlignment="Stretch"
+                    VerticalContentAlignment="Center"
+                    ToolTip="{Binding NetworkConfig_tcp_port_tooltip}">
+                    <TextBox.Text>
+                        <Binding Path="Port" UpdateSourceTrigger="PropertyChanged">
+                            <Binding.ValidationRules>
+                                <DataErrorValidationRule />
+                                <ExceptionValidationRule />
+                            </Binding.ValidationRules>
+                        </Binding>
+                    </TextBox.Text>
+                </TextBox>
+                <!--    -->
+                <Label
+                    Grid.Row="4"
+                    Grid.ColumnSpan="3"
+                    Content="{Binding NetworkConfig_label_watchdog_timer, Source={StaticResource LocUiStrings}}"
+                    Style="{StaticResource infoLabelStyle}" />
+                <DockPanel Grid.Row="5" Grid.ColumnSpan="3">
+                    <StackPanel DockPanel.Dock="Left" Orientation="Horizontal">
+                        <TextBlock
+                            MinWidth="50"
+                            VerticalAlignment="Center"
+                            Text="{Binding WatchdogTimer}"
+                            TextAlignment="Right" />
+                        <Decorator Width="5" />
+                        <Label Content="{Binding NetworkConfig_label_minutes, Source={StaticResource LocUiStrings}}" Style="{StaticResource infoLabelStyle}" />
+                        <Decorator Width="10" />
+                    </StackPanel>
+                    <Slider
+                        VerticalAlignment="Center"
+                        AutoToolTipPlacement="BottomRight"
+                        Maximum="360"
+                        Minimum="1"
+                        Value="{Binding WatchdogTimer, FallbackValue=30}" />
+                </DockPanel>
+            </Grid>
+        </DockPanel>
+    </Grid>
+</UserControl>
