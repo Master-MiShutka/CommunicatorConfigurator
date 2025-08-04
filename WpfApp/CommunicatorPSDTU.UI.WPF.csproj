@@ -72,6 +72,7 @@
     <!-- <BeautyGitTree>master</BeautyGitTree> -->
   </PropertyGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\C-sharp-libraries\src\TextLogger\TextLogger.csproj" />
 		<ProjectReference Include="..\CommunicatorShared\CommunicatorCommon.csproj" />
 	</ItemGroup>
 	<ItemGroup>

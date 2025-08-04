@@ -3,8 +3,8 @@ using Microsoft.Extensions.Logging;
 
 namespace TMP.Work.CommunicatorPSDTU.UI.Wpf
 {
-    using Common.Logger;
     using Common.ViewModels;
+    using TMP.Work.Common.Logger;
     using TMP.Work.CommunicatorPSDTU.Common;
 
     /// <summary>
@@ -54,7 +54,7 @@ namespace TMP.Work.CommunicatorPSDTU.UI.Wpf
 
         private static void CurrentDomain_FirstChanceException(object? sender, System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs e)
         {
-            var trace = Common.Utils.Common.GetExceptionDetails(e.Exception);
+            var trace = TMP.Shared.Common.Utils.GetExceptionDetails(e.Exception);
 
             string message = $"App_FirstChanceException :: {e.Exception.Message}\n" + trace;
 
@@ -65,7 +65,7 @@ namespace TMP.Work.CommunicatorPSDTU.UI.Wpf
         {
             string errorMsg = (e.ExceptionObject as Exception)?.Message ?? Common.Resources.Strings.ERROR_OCCURED;
 
-            var trace = Common.Utils.Common.GetExceptionDetails(e.ExceptionObject as Exception);
+            var trace = TMP.Shared.Common.Utils.GetExceptionDetails(e.ExceptionObject as Exception);
 
             string message = $"CurrentDomain_UnhandledException :: {errorMsg}\n" + trace;
 
@@ -74,7 +74,7 @@ namespace TMP.Work.CommunicatorPSDTU.UI.Wpf
 
         private void App_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
         {
-            var trace = Common.Utils.Common.GetExceptionDetails(e.Exception);
+            var trace = TMP.Shared.Common.Utils.GetExceptionDetails(e.Exception);
 
             string message = $"App_DispatcherUnhandledException :: {e.Exception.Message}\n" + trace;
 

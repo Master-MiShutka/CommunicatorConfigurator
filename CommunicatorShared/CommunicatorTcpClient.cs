@@ -366,7 +366,7 @@ public partial class CommunicatorTcpClient : IDisposable
         }
         catch (Exception e)
         {
-            var trace = Common.Utils.Common.GetExceptionDetails(e);
+            var trace = TMP.Shared.Common.Utils.GetExceptionDetails(e);
 
             string message = Resources.Strings.ERROR_OCCURED + " :: {Msg}\n" + trace;
 

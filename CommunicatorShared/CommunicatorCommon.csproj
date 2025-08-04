@@ -24,6 +24,9 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\C-sharp-libraries\src\Shared-Common\Shared-Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Update="Resources\NetErrors.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>

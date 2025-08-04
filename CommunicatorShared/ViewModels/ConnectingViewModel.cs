@@ -78,7 +78,7 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
         {
             this.isCancelled = true;
 
-            this.CancelCommandHeader = Resources.Strings.IS_CANCELLING_COMMAND_HEADER;
+            this.CancelCommandHeader = Resources.UI_strings.IS_CANCELLING_COMMAND_HEADER;
 
             this.cancellationTokenSource.Cancel();
 
