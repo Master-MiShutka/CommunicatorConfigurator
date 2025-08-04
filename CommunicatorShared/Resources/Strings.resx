@@ -129,20 +129,11 @@
   <data name="CHECK_NET_LEVEL_MESSAGE" xml:space="preserve">
     <value>reading signal strength</value>
   </data>
-  <data name="IS_CANCELLING_COMMAND_HEADER" xml:space="preserve">
-    <value>Stopping ...</value>
-  </data>
   <data name="CONNECT_COMMAND_HEADER" xml:space="preserve">
     <value>Connect</value>
   </data>
   <data name="DISCONNECT_COMMAND_HEADER" xml:space="preserve">
     <value>Disconnect</value>
-  </data>
-  <data name="START_CHECK_DEVICES_COMMAND_HEADER" xml:space="preserve">
-    <value>Start check</value>
-  </data>
-  <data name="STOP_CHECK_DEVICES_COMMAND_HEADER" xml:space="preserve">
-    <value>Stop check</value>
   </data>
   <data name="NEW_DEVICE_SETTINGS_IS_SAVING" xml:space="preserve">
     <value>Saving settings ...</value>

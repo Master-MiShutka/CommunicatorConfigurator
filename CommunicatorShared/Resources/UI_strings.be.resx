@@ -334,4 +334,19 @@ Pieralik možna ŭstavić z bufiera abmienu. U bufiery pavinna być tablica z dv
   <data name="ConnectionParamsContent_label_netStrengthCheckInterval" xml:space="preserve">
     <value>Interval pravierki ŭzroŭniu sihnalu, ms</value>
   </data>
+  <data name="Checking_devices_state" xml:space="preserve">
+    <value>Praviarajecca '{0}' – sproba №{1}.</value>
+  </data>
+  <data name="Checking_devices_progress" xml:space="preserve">
+    <value>Zavieršana pravierka {0} z {1} – {2:N1}%.</value>
+  </data>
+  <data name="IS_CANCELLING_COMMAND_HEADER" xml:space="preserve">
+    <value>Spyniennie ...</value>
+  </data>
+  <data name="START_CHECK_DEVICES_COMMAND_HEADER" xml:space="preserve">
+    <value>Zapuscić pravierku</value>
+  </data>
+  <data name="STOP_CHECK_DEVICES_COMMAND_HEADER" xml:space="preserve">
+    <value>Spynić pravierku</value>
+  </data>
 </root>

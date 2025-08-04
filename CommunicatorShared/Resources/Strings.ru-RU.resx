@@ -129,20 +129,11 @@
   <data name="CHECK_NET_LEVEL_MESSAGE" xml:space="preserve">
     <value>чтение уровня сигнала</value>
   </data>
-  <data name="IS_CANCELLING_COMMAND_HEADER" xml:space="preserve">
-    <value>Остановка ...</value>
-  </data>
   <data name="CONNECT_COMMAND_HEADER" xml:space="preserve">
     <value>Подключиться</value>
   </data>
   <data name="DISCONNECT_COMMAND_HEADER" xml:space="preserve">
     <value>Отключиться</value>
-  </data>
-  <data name="START_CHECK_DEVICES_COMMAND_HEADER" xml:space="preserve">
-    <value>Запустить проверку</value>
-  </data>
-  <data name="STOP_CHECK_DEVICES_COMMAND_HEADER" xml:space="preserve">
-    <value>Остановить проверку</value>
   </data>
   <data name="NEW_DEVICE_SETTINGS_IS_SAVING" xml:space="preserve">
     <value>Сохранение настроек ...</value>

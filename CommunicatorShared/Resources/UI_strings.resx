@@ -337,4 +337,19 @@ A ready-made Excel table can also be used. The results can be saved in it.</valu
   <data name="ConnectionParamsContent_label_netStrengthCheckInterval" xml:space="preserve">
     <value>Signal level check interval, ms</value>
   </data>
+  <data name="Checking_devices_state" xml:space="preserve">
+    <value>Checking '{0}' – attempt #{1}.</value>
+  </data>
+  <data name="Checking_devices_progress" xml:space="preserve">
+    <value>Completed checking {0} of {1} – {2:N1}.</value>
+  </data>
+  <data name="IS_CANCELLING_COMMAND_HEADER" xml:space="preserve">
+    <value>Stopping ...</value>
+  </data>
+  <data name="START_CHECK_DEVICES_COMMAND_HEADER" xml:space="preserve">
+    <value>Start check</value>
+  </data>
+  <data name="STOP_CHECK_DEVICES_COMMAND_HEADER" xml:space="preserve">
+    <value>Stop check</value>
+  </data>
 </root>

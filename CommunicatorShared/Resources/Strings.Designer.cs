@@ -205,15 +205,6 @@ namespace TMP.Work.CommunicatorPSDTU.Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stopping ....
-        /// </summary>
-        public static string IS_CANCELLING_COMMAND_HEADER {
-            get {
-                return ResourceManager.GetString("IS_CANCELLING_COMMAND_HEADER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Loaded {0} lines..
         /// </summary>
         public static string LOADED_N_LINES {
@@ -295,15 +286,6 @@ namespace TMP.Work.CommunicatorPSDTU.Common.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start check.
-        /// </summary>
-        public static string START_CHECK_DEVICES_COMMAND_HEADER {
-            get {
-                return ResourceManager.GetString("START_CHECK_DEVICES_COMMAND_HEADER", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Start devices check..
         /// </summary>
         public static string START_DEVICES_CHECK {
@@ -318,15 +300,6 @@ namespace TMP.Work.CommunicatorPSDTU.Common.Resources {
         public static string STARTING_UPDATE_NET_STRENGTH {
             get {
                 return ResourceManager.GetString("STARTING_UPDATE_NET_STRENGTH", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Stop check.
-        /// </summary>
-        public static string STOP_CHECK_DEVICES_COMMAND_HEADER {
-            get {
-                return ResourceManager.GetString("STOP_CHECK_DEVICES_COMMAND_HEADER", resourceCulture);
             }
         }
         

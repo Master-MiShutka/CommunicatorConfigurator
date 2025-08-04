@@ -243,6 +243,24 @@ namespace TMP.Work.CommunicatorPSDTU.Common.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Completed checking {0} of {1} – {2:N1}..
+        /// </summary>
+        public static string Checking_devices_progress {
+            get {
+                return ResourceManager.GetString("Checking_devices_progress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checking &apos;{0}&apos; – attempt #{1}..
+        /// </summary>
+        public static string Checking_devices_state {
+            get {
+                return ResourceManager.GetString("Checking_devices_state", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Checking signal level and connection type....
         /// </summary>
         public static string CheckingSignalLevelAndConnectionType {
@@ -455,6 +473,15 @@ namespace TMP.Work.CommunicatorPSDTU.Common.Resources {
         public static string GettingData {
             get {
                 return ResourceManager.GetString("GettingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stopping ....
+        /// </summary>
+        public static string IS_CANCELLING_COMMAND_HEADER {
+            get {
+                return ResourceManager.GetString("IS_CANCELLING_COMMAND_HEADER", resourceCulture);
             }
         }
         
@@ -698,6 +725,24 @@ namespace TMP.Work.CommunicatorPSDTU.Common.Resources {
         public static string Settings_tab_header {
             get {
                 return ResourceManager.GetString("Settings_tab_header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start check.
+        /// </summary>
+        public static string START_CHECK_DEVICES_COMMAND_HEADER {
+            get {
+                return ResourceManager.GetString("START_CHECK_DEVICES_COMMAND_HEADER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop check.
+        /// </summary>
+        public static string STOP_CHECK_DEVICES_COMMAND_HEADER {
+            get {
+                return ResourceManager.GetString("STOP_CHECK_DEVICES_COMMAND_HEADER", resourceCulture);
             }
         }
         

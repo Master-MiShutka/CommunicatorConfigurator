@@ -129,20 +129,11 @@
   <data name="CHECK_NET_LEVEL_MESSAGE" xml:space="preserve">
     <value>čytannie ŭzroŭniu sihnalu</value>
   </data>
-  <data name="IS_CANCELLING_COMMAND_HEADER" xml:space="preserve">
-    <value>Spyniennie ...</value>
-  </data>
   <data name="CONNECT_COMMAND_HEADER" xml:space="preserve">
     <value>Padkliučycca</value>
   </data>
   <data name="DISCONNECT_COMMAND_HEADER" xml:space="preserve">
     <value>Adkliučycca</value>
-  </data>
-  <data name="START_CHECK_DEVICES_COMMAND_HEADER" xml:space="preserve">
-    <value>Zapuscić pravierku</value>
-  </data>
-  <data name="STOP_CHECK_DEVICES_COMMAND_HEADER" xml:space="preserve">
-    <value>Spynić pravierku</value>
   </data>
   <data name="NEW_DEVICE_SETTINGS_IS_SAVING" xml:space="preserve">
     <value>Zachavannie nalad ...</value>

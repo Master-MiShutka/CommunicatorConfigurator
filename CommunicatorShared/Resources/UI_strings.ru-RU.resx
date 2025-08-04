@@ -335,4 +335,19 @@
   <data name="ConnectionParamsContent_label_netStrengthCheckInterval" xml:space="preserve">
     <value>Интервал проверки уровня сигнала, мс</value>
   </data>
+  <data name="Checking_devices_state" xml:space="preserve">
+    <value>Проверяется '{0}' – попытка №{1}.</value>
+  </data>
+  <data name="Checking_devices_progress" xml:space="preserve">
+    <value>Завершена проверка {0} из {1} – {2:N1}%.</value>
+  </data>
+  <data name="IS_CANCELLING_COMMAND_HEADER" xml:space="preserve">
+    <value>Остановка ...</value>
+  </data>
+  <data name="START_CHECK_DEVICES_COMMAND_HEADER" xml:space="preserve">
+    <value>Запустить проверку</value>
+  </data>
+  <data name="STOP_CHECK_DEVICES_COMMAND_HEADER" xml:space="preserve">
+    <value>Остановить проверку</value>
+  </data>
 </root>
