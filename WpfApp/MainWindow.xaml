@@ -97,7 +97,8 @@
                 <TabItem
                     Padding="5"
                     Header="{Binding Check_devices_tab_header, Source={StaticResource LocUiStrings}}"
-                    HeaderTemplate="{StaticResource TabItemHeaderTemplateWithExtraSpace}">
+                    HeaderTemplate="{StaticResource TabItemHeaderTemplateWithExtraSpace}"
+                    Tag="CheckContent">
                     <local_controls:CheckContent />
                 </TabItem>
                 <TabItem
