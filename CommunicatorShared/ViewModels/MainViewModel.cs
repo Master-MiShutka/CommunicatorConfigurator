@@ -50,6 +50,8 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
 
         [Notify(set: Setter.Private)] private INotifyPropertyChanged? dialog;
 
+        [Notify(set: Setter.Private)] private string? checkingDevicesState;
+
         /// <summary>
         /// Список устройств для проверки
         /// </summary>
@@ -66,7 +68,7 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
 
         private bool isExcelConfigured;
 
-        private bool isDevicesChecking, isDevicesChecked;
+        [Notify(set: Setter.Private)] private bool isDevicesChecking, isDevicesChecked;
 
         private readonly Dispatcher uiDispatcher;
 
@@ -120,7 +122,6 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
             if (e.PropertyName == nameof(AppSettings.AppLanguage))
             {
                 this.OnPropertyChanged(nameof(this.Message));
-                this.OnPropertyChanged(nameof(this.StartCheckDevicesCommandHeader));
                 this.OnPropertyChanged(nameof(this.ConnectCommandHeader));
             }
 
@@ -149,6 +150,17 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
                     this.communicatorTcpClient?.Close();
 
                     this.cancellationTokenSource?.TryReset();
+
+                    this.CheckingDevicesState = null;
+
+                    this.uiDispatcher.Invoke(this.ClearListCommand.NotifyCanExecuteChanged);
+                    this.uiDispatcher.Invoke(this.StartCheckDevicesCommand.NotifyCanExecuteChanged);
+
+                    this.uiDispatcher.Invoke(this.PasteListFromClipboardCommand.NotifyCanExecuteChanged);
+                    this.uiDispatcher.Invoke(this.CopyResultToClipboardCommand.NotifyCanExecuteChanged);
+
+                    this.uiDispatcher.Invoke(this.PasteListFromFileCommand.NotifyCanExecuteChanged);
+                    this.uiDispatcher.Invoke(this.WriteResultToFileCommand.NotifyCanExecuteChanged);
 
                     break;
 
@@ -191,6 +203,13 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
                 case MainViewModelState.CheckingDevice:
                     break;
                 case MainViewModelState.CheckingDevices:
+
+                    this.IsDevicesChecking = true;
+
+                    this.uiDispatcher.Invoke(this.StartCheckDevicesCommand.NotifyCanExecuteChanged);
+                    this.uiDispatcher.Invoke(this.PasteListFromClipboardCommand.NotifyCanExecuteChanged);
+                    this.uiDispatcher.Invoke(this.ClearListCommand.NotifyCanExecuteChanged);
+
                     this.IsConnected = false;
 
                     this.netLevelCheckTimer?.Dispose();
@@ -367,7 +386,7 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
                 {
                     this.logger.LogError(e, Resources.Strings.ERROR_DATA_READING);
 
-                    var exDetails = Common.Utils.Common.GetExceptionDetails(e);
+                    var exDetails = TMP.Shared.Common.Utils.GetExceptionDetails(e);
 
                     this.logger.LogError(exDetails);
 
@@ -610,51 +629,59 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
 
         private bool CanStartCheckDevices()
         {
-            return this.cancellationTokenSource?.IsCancellationRequested == false && this.Devices.Count > 0 && this.isDevicesChecking == false;
+            bool isCancellationRequested = this.cancellationTokenSource is not null && this.cancellationTokenSource.IsCancellationRequested;
+
+            return isCancellationRequested == false && this.Devices.Count > 0;
         }
 
-        [RelayCommand(CanExecute = nameof(CanStartCheckDevices))]
-        private async Task StartCheckDevicesAsync()
+        [RelayCommand(CanExecute = nameof(CanStartCheckDevices), IncludeCancelCommand = true)]
+        private async Task StartCheckDevicesAsync(CancellationToken token)
         {
-            if (this.isDevicesChecking)
-            {
-                this.cancellationTokenSource?.Cancel();
-
-                this.OnPropertyChanged(nameof(this.StartCheckDevicesCommandHeader));
-
-                this.uiDispatcher.Invoke(this.StartCheckDevicesCommand.NotifyCanExecuteChanged);
-
-                return;
-            }
+            this.IsDevicesChecked = false;
 
             try
             {
                 this.logger.LogTrace(Resources.Strings.START_DEVICES_CHECK);
 
-                if (this.cancellationTokenSource == null || this.cancellationTokenSource.TryReset() == false)
-                {
-                    this.cancellationTokenSource = new();
-                }
-
-                this.isDevicesChecking = true;
-
-                this.OnPropertyChanged(nameof(this.StartCheckDevicesCommandHeader));
-
-                if (this.cancellationTokenSource.IsCancellationRequested)
-                {
-                    return;
-                }
-
                 this.State = MainViewModelState.CheckingDevices;
 
+                foreach (var device in this.Devices)
+                {
+                    device.Status = string.Empty;
+                }
+
                 System.Collections.Concurrent.ConcurrentQueue<Device> queue = new System.Collections.Concurrent.ConcurrentQueue<Device>(this.Devices);
+                int total = this.Devices.Count;
+                int completed = 0;
                 while (!queue.IsEmpty)
                 {
+                    if (token.IsCancellationRequested)
+                    {
+                        break;
+                    }
+
                     Device? device = new();
 
                     if (queue.TryDequeue(out device))
                     {
-                        bool isOk = await this.GetDeviceInfoAsync(device, this.cancellationTokenSource.Token);
+                        this.CheckingDevicesState = string.Format(
+                            this.Settings.SelectedCultureInfo,
+                            Common.Resources.UI_strings.Checking_devices_progress,
+                            completed,
+                            total,
+                            100.0d * completed / total
+                        );
+
+                        this.CheckingDevicesState += System.Environment.NewLine;
+
+                        this.CheckingDevicesState += string.Format(
+                            this.Settings.SelectedCultureInfo,
+                            Common.Resources.UI_strings.Checking_devices_state,
+                            device.Name,
+                            device.NumberOfConnectionAttemps + 1
+                        );
+
+                        bool isOk = await this.GetDeviceInfoAsync(device, token);
 
                         if (isOk == false)
                         {
@@ -666,27 +693,30 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
                     }
                 }
 
-                this.isDevicesChecked = true;
+                this.IsDevicesChecked = true;
             }
             catch (Exception e)
             {
-                this.isDevicesChecked = false;
+                this.IsDevicesChecked = false;
 
                 this.logger.LogError(e, Resources.Strings.ERROR_OCCURED);
             }
             finally
             {
-                this.isDevicesChecking = false;
+                this.IsDevicesChecking = false;
 
                 this.State = MainViewModelState.Ready;
-
-                this.OnPropertyChanged(nameof(this.StartCheckDevicesCommandHeader));
 
                 this.logger.LogTrace("MainViewModel: end devices checking");
             }
         }
 
-        [RelayCommand]
+        private bool CanPasteListFromClipboard()
+        {
+            return this.Devices.Count == 0 && this.IsDevicesChecking == false;
+        }
+
+        [RelayCommand(CanExecute = nameof(CanPasteListFromClipboard))]
         private void PasteListFromClipboard()
         {
             if (System.Windows.Clipboard.ContainsText(System.Windows.TextDataFormat.CommaSeparatedValue))
@@ -735,11 +765,12 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
 
             this.ClearListCommand.NotifyCanExecuteChanged();
             this.StartCheckDevicesCommand.NotifyCanExecuteChanged();
+            this.PasteListFromClipboardCommand.NotifyCanExecuteChanged();
         }
 
         private bool CanCopyResultToClipboard()
         {
-            return this.isExcelConfigured && this.Devices.Count > 0 && this.isDevicesChecked;
+            return this.Devices.Count > 0 && this.isDevicesChecked;
         }
 
         [RelayCommand(CanExecute = nameof(CanCopyResultToClipboard))]
@@ -772,9 +803,20 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
 
             try
             {
-                System.Windows.Clipboard.SetText(csvData, System.Windows.TextDataFormat.CommaSeparatedValue);
+                System.Windows.DataObject dataObject = new System.Windows.DataObject();
+
+                // Add tab-delimited text to the container object as is.
+                dataObject.SetText(csvData.Replace(';', '\t'));
+
+                // Convert the CSV text to a UTF-8 byte stream before adding it to the container object.
+                var bytes = System.Text.Encoding.UTF8.GetBytes(csvData);
+                var stream = new System.IO.MemoryStream(bytes);
+                dataObject.SetData(System.Windows.DataFormats.CommaSeparatedValue, stream);
             }
-            catch { }
+            catch (Exception e)
+            {
+                this.logger.LogError(e, "Clipboard error:");
+            }
         }
 
         private bool CanPasteListFromFile()
@@ -813,7 +855,7 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
 
         private bool CanClearList()
         {
-            return this.Devices.Count > 0;
+            return this.Devices.Count > 0 && this.isDevicesChecking == false;
         }
 
         [RelayCommand(CanExecute = nameof(CanClearList))]
@@ -826,6 +868,8 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
 
             this.CopyResultToClipboardCommand.NotifyCanExecuteChanged();
             this.WriteResultToFileCommand.NotifyCanExecuteChanged();
+
+            this.PasteListFromClipboardCommand.NotifyCanExecuteChanged();
         }
 
         #endregion
@@ -849,7 +893,7 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
         {
             MainViewModelState.Ready => Resources.Strings.CONNECT_COMMAND_HEADER,
             MainViewModelState.Connecting or MainViewModelState.Connected => Resources.Strings.DISCONNECT_COMMAND_HEADER,
-            MainViewModelState.Cancelling => Resources.Strings.IS_CANCELLING_COMMAND_HEADER,
+            MainViewModelState.Cancelling => Resources.UI_strings.IS_CANCELLING_COMMAND_HEADER,
             _ => Resources.Strings.CONNECT_COMMAND_HEADER,
         };
 
@@ -866,29 +910,6 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
             _ => Resources.Strings.DEFAULT_READY_MESSAGE,
         };
 #pragma warning restore IDE0072 // Add missing cases
-
-        /// <summary>
-        /// Заголовок кнопки запустить/остановить проверку списка устройств
-        /// </summary>
-        public string StartCheckDevicesCommandHeader
-        {
-            get
-            {
-                if (this.isDevicesChecking)
-                {
-                    if (this.cancellationTokenSource != null && this.cancellationTokenSource.IsCancellationRequested)
-                    {
-                        return Resources.Strings.IS_CANCELLING_COMMAND_HEADER;
-                    }
-
-                    return Resources.Strings.STOP_CHECK_DEVICES_COMMAND_HEADER;
-                }
-                else
-                {
-                    return Resources.Strings.START_CHECK_DEVICES_COMMAND_HEADER;
-                }
-            }
-        }
 
         #endregion
 
