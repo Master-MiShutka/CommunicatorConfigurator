@@ -24,20 +24,33 @@ public sealed class CultureResources
 
             SupportedCultures.Add(cultureInfo);
 
-            string startupPath = System.AppDomain.CurrentDomain.BaseDirectory;
 
+            // startupPath
+            FoundInstalledCulturesInDirectory(System.AppDomain.CurrentDomain.BaseDirectory);
+
+            // startupPath + libraries\locales - Beauty library moved locales there
+            FoundInstalledCulturesInDirectory(System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "libraries\\locales"));
+
+            FoundInstalledCultures = true;
+        }
+    }
+
+    private static void FoundInstalledCulturesInDirectory(string path)
+    {
+        if (System.IO.Path.Exists(path))
+        {
             string executableName = System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().Location);
 
             string localeLibName = executableName + ".resources.dll";
 
-            foreach (string directory in System.IO.Directory.GetDirectories(startupPath))
+            foreach (string directory in System.IO.Directory.GetDirectories(path))
             {
                 try
                 {
                     //see if this directory corresponds to a valid culture name
                     System.IO.DirectoryInfo directoryInfo = new System.IO.DirectoryInfo(directory);
 
-                    cultureInfo = CultureInfo.GetCultureInfo(directoryInfo.Name);
+                    CultureInfo cultureInfo = CultureInfo.GetCultureInfo(directoryInfo.Name);
 
                     //determine if a resources dll exists in this directory that matches the executable name
                     if (directoryInfo.GetFiles(localeLibName).Length > 0)
@@ -50,8 +63,6 @@ public sealed class CultureResources
                 {
                 }
             }
-
-            FoundInstalledCultures = true;
         }
     }
 
