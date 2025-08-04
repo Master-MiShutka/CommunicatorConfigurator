@@ -39,7 +39,12 @@
                         <Button
                             Padding="10,5"
                             Command="{Binding StartCheckDevicesCommand}"
-                            Content="{Binding StartCheckDevicesCommandHeader}" />
+                            Content="{Binding START_CHECK_DEVICES_COMMAND_HEADER, Source={StaticResource LocUiStrings}}" />
+                        <Decorator Width="5" Margin="2" />
+                        <Button
+                            Padding="10,5"
+                            Command="{Binding StartCheckDevicesCancelCommand}"
+                            Content="{Binding STOP_CHECK_DEVICES_COMMAND_HEADER, Source={StaticResource LocUiStrings}}" />
                     </StackPanel>
                     <Decorator Width="10" />
                     <StackPanel Orientation="Vertical">
@@ -73,44 +78,62 @@
                 </StackPanel>
             </Expander>
             <Decorator Height="5" />
+            <StackPanel Visibility="{Binding IsDevicesChecking, Converter={StaticResource BoolToVisibilityConverter}}">
+                <TextBlock FontWeight="Medium" Text="{Binding CheckingDevicesState}" />
+                <Decorator Height="15" />
+            </StackPanel>
         </StackPanel>
         <DataGrid
             AlternationCount="2"
             AutoGenerateColumns="False"
             BorderBrush="{DynamicResource {x:Static SystemColors.InactiveBorderBrushKey}}"
             BorderThickness="0.5"
+            CanUserResizeRows="False"
             IsReadOnly="True"
             ItemsSource="{Binding Devices}"
-            SelectionMode="Single">
-            <DataGrid.Resources>
-                <Style x:Key="DataGridCellCentered" TargetType="DataGridCell">
-                    <Setter Property="TextBlock.TextAlignment" Value="Center" />
+            SelectionMode="Extended">
+            <DataGrid.RowStyle>
+                <Style TargetType="{x:Type DataGridRow}">
+                    <Style.Triggers>
+                        <Trigger Property="AlternationIndex" Value="0">
+                            <Setter Property="Background" Value="Transparent" />
+                        </Trigger>
+                        <Trigger Property="AlternationIndex" Value="1">
+                            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.AccentColorLight3BrushKey}}" />
+                        </Trigger>
+                    </Style.Triggers>
                 </Style>
-                <Style x:Key="DataGridCellLeftAlignment" TargetType="DataGridCell">
-                    <Setter Property="TextBlock.TextAlignment" Value="Left" />
-                </Style>
-            </DataGrid.Resources>
+            </DataGrid.RowStyle>
             <DataGrid.Columns>
-                <DataGridTextColumn
-                    MinWidth="50"
-                    Binding="{Binding Status}"
-                    Header="#" />
-                <DataGridTextColumn
-                    MinWidth="200"
-                    Binding="{Binding Name}"
-                    CellStyle="{StaticResource DataGridCellLeftAlignment}"
-                    Header="{Binding CheckContent_grid_column_description, Source={StaticResource LocUiStrings}}" />
-                <DataGridTextColumn
-                    Width="130"
-                    Binding="{Binding IpAddress}"
-                    CellStyle="{StaticResource DataGridCellLeftAlignment}"
-                    Header="{Binding CheckContent_grid_column_ip_address, Source={StaticResource LocUiStrings}}"
-                    TextElement.FontFamily="Lucida Console,Consolas" />
+                <DataGridTemplateColumn MinWidth="30" Header="#">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Status}" TextAlignment="Center" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn MinWidth="200" Header="{Binding CheckContent_grid_column_description, Source={StaticResource LocUiStrings}}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" TextAlignment="Left" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTemplateColumn Width="130" Header="{Binding CheckContent_grid_column_ip_address, Source={StaticResource LocUiStrings}}">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock
+                                FontFamily="Lucida Console,Consolas"
+                                Text="{Binding IpAddress}"
+                                TextAlignment="Left" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
                 <DataGridTextColumn
                     MinWidth="200"
                     Binding="{Binding DeviceName}"
                     Header="{Binding CheckContent_grid_column_device_type, Source={StaticResource LocUiStrings}}" />
-                <DataGridTemplateColumn Width="80" Header="{Binding CheckContent_grid_column_signal_level, Source={StaticResource LocUiStrings}}">
+                <DataGridTemplateColumn Width="85" Header="{Binding CheckContent_grid_column_signal_level, Source={StaticResource LocUiStrings}}">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
@@ -145,41 +168,74 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <!--<ListView x:Uid="CheckContent_dockPanel_listView_1"
+        <!-- <ListView
             AlternationCount="2"
             BorderBrush="{DynamicResource {x:Static SystemColors.InactiveBorderBrushKey}}"
             BorderThickness="1"
             ItemsSource="{Binding Devices}"
             Visibility="Collapsed">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Style.Triggers>
+                        <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                            <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.AccentColorLight3BrushKey}}" />
+                        </Trigger>
+                    </Style.Triggers>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView AllowsColumnReorder="true">
                     <GridView.Columns>
-                        <GridViewColumn x:Uid="GridViewColumn_name" DisplayMemberBinding="{Binding Name}" Header="Описание" />
-                        <GridViewColumn x:Uid="GridViewColumn_ipAddress" DisplayMemberBinding="{Binding IpAddress}" Header="Ip адрес" />
-                        <GridViewColumn x:Uid="GridViewColumn_deviceName" DisplayMemberBinding="{Binding DeviceName}" Header="Тип устройства" />
-                        <GridViewColumn x:Uid="GridViewColumn_netLevel" Width="80" Header="Уровень сигнала">
+                        <GridViewColumn
+                            Width="50"
+                            DisplayMemberBinding="{Binding Status}"
+                            Header="#" />
+                        <GridViewColumn
+                            Width="200"
+                            DisplayMemberBinding="{Binding Name}"
+                            Header="{Binding CheckContent_grid_column_description, Source={StaticResource LocUiStrings}}" />
+                        <GridViewColumn
+                            Width="130"
+                            DisplayMemberBinding="{Binding IpAddress}"
+                            Header="{Binding CheckContent_grid_column_ip_address, Source={StaticResource LocUiStrings}}"
+                            TextElement.FontFamily="Lucida Console,Consolas" />
+                        <GridViewColumn
+                            Width="200"
+                            DisplayMemberBinding="{Binding DeviceName}"
+                            Header="{Binding CheckContent_grid_column_device_type, Source={StaticResource LocUiStrings}}" />
+                        <GridViewColumn Width="80" Header="{Binding CheckContent_grid_column_signal_level, Source={StaticResource LocUiStrings}}">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <local_controls:SignalIndicator
-                                        Width="60"
-                                        Height="15"
-                                        Level="{Binding NetLevel, Mode=OneWay}" />
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock MinWidth="20" Text="{Binding NetLevel, Mode=OneWay}" />
+                                        <Decorator Width="5" />
+                                        <local_controls:SignalIndicator
+                                            Width="40"
+                                            Level="{Binding NetLevel, Mode=OneWay}"
+                                            StrokeBrush="{DynamicResource {x:Static SystemColors.AccentColorDark2BrushKey}}" />
+                                    </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn x:Uid="GridViewColumn_netMode"
-                            Width="50"
+                        <GridViewColumn
+                            Width="70"
                             DisplayMemberBinding="{Binding NetMode}"
-                            Header="Режим сети" />
-                        <GridViewColumn x:Uid="GridViewColumn_fwVersion"
-                            Width="50"
+                            Header="{Binding CheckContent_grid_column_net_mode, Source={StaticResource LocUiStrings}}" />
+                        <GridViewColumn
+                            Width="70"
                             DisplayMemberBinding="{Binding DeviceFirmwareVersion}"
-                            Header="Версия ПО" />
-                        <GridViewColumn x:Uid="GridViewColumn_fwDate"
-                            Width="60"
+                            Header="{Binding CheckContent_grid_column_firmware_version, Source={StaticResource LocUiStrings}}" />
+                        <GridViewColumn
+                            Width="80"
                             DisplayMemberBinding="{Binding DeviceFirmwareDate}"
-                            Header="Дата ПО" />
-                        <GridViewColumn x:Uid="GridViewColumn_numberOfConAttemps"  DisplayMemberBinding="{Binding NumberOfConnectionAttemps}" Header="Кол-во попыток соединения" />
+                            Header="{Binding CheckContent_grid_column_firmware_date, Source={StaticResource LocUiStrings}}" />
+                        <GridViewColumn Width="35" Header="#">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding NumberOfConnectionAttemps}" ToolTip="{Binding CheckContent_grid_column_number_of_retries, Source={StaticResource LocUiStrings}}" />
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView.Columns>
                 </GridView>
             </ListView.View>
