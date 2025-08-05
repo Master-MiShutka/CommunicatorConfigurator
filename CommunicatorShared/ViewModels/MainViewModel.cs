@@ -495,7 +495,7 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
                 // Проверка уровня сигнала и типа связи
                 var (networkMode, signalStrength) = await client.ReadNetworkModeAndLevelAsync();
 
-                device.DeviceNetworkType = networkMode;
+                device.NetMode = networkMode;
                 device.NetLevel = signalStrength;
 
                 timer.Dispose();
@@ -505,7 +505,7 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
 
             void onErrorGetData(Exception e)
             {
-                this.logger.LogError($"Get info for {device} failed.");
+                this.logger.LogError($"Get info for {device.IpAddress} failed.");
                 timer.Dispose();
                 device.Status = "❌";
             }
@@ -664,6 +664,8 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
 
                     if (queue.TryDequeue(out device))
                     {
+                        completed = total - queue.Count;
+
                         this.CheckingDevicesState = string.Format(
                             this.Settings.SelectedCultureInfo,
                             Common.Resources.UI_strings.Checking_devices_progress,
@@ -721,19 +723,28 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
         {
             if (System.Windows.Clipboard.ContainsText(System.Windows.TextDataFormat.CommaSeparatedValue))
             {
-                IList<IList<string>>? list;
+                IList<IList<string>>? list = null;
 
-                string csvData = System.Windows.Clipboard.GetText(System.Windows.TextDataFormat.CommaSeparatedValue);
+                string csvData = string.Empty;
 
-                if (string.IsNullOrEmpty(csvData))
+                try
                 {
-                    csvData = System.Windows.Clipboard.GetText(System.Windows.TextDataFormat.UnicodeText);
+                    csvData = System.Windows.Clipboard.GetText(System.Windows.TextDataFormat.CommaSeparatedValue);
 
-                    list = Utils.TableHelper.ParseTable(csvData, '\t');
+                    if (string.IsNullOrEmpty(csvData))
+                    {
+                        csvData = System.Windows.Clipboard.GetText(System.Windows.TextDataFormat.UnicodeText);
+
+                        list = Utils.TableHelper.ParseTable(csvData, '\t');
+                    }
+                    else
+                    {
+                        list = Utils.TableHelper.ParseTable(csvData, ';');
+                    }
                 }
-                else
+                catch (Exception e)
                 {
-                    list = Utils.TableHelper.ParseTable(csvData, ';');
+                    this.logger.LogError(e, "Clipboard error");
                 }
 
                 if (list != null && list.Count > 0)
@@ -803,15 +814,16 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
 
             try
             {
-                System.Windows.DataObject dataObject = new System.Windows.DataObject();
-
-                // Add tab-delimited text to the container object as is.
-                dataObject.SetText(csvData.Replace(';', '\t'));
+                this.logger.LogTrace("Try copy result to clipboard");
 
                 // Convert the CSV text to a UTF-8 byte stream before adding it to the container object.
                 var bytes = System.Text.Encoding.UTF8.GetBytes(csvData);
                 var stream = new System.IO.MemoryStream(bytes);
-                dataObject.SetData(System.Windows.DataFormats.CommaSeparatedValue, stream);
+
+                System.Windows.Clipboard.SetData(System.Windows.DataFormats.CommaSeparatedValue, stream);
+
+                System.Windows.Clipboard.SetText(csvData, System.Windows.TextDataFormat.CommaSeparatedValue);
+                System.Windows.Clipboard.SetText(csvData.Replace(';', '\t'), System.Windows.TextDataFormat.UnicodeText);
             }
             catch (Exception e)
             {
