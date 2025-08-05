@@ -3,12 +3,10 @@ namespace TestProject
     using Microsoft.Extensions.Logging;
     using TMP.Work.CommunicatorPSDTU.Common.Model;
     using TMP.Work.CommunicatorPSDTU.Common.Parser;
-    using TMP.Work.CommunicatorPSDTU.Common.ViewModels;
 
-    public class MainViewModelTests : IDisposable
+    public class MainViewModelTests
     {
         private readonly FunctionsAnswerParser functionsAnswerParser;
-        private readonly MainViewModel mainViewModel;
 
         private readonly byte[] infoAnswerOk, netModeAndNetLevelOk, netConfigOk, configOk;
 
@@ -19,28 +17,18 @@ namespace TestProject
             var logger = loggerFactory.CreateLogger("Main");
 
             this.functionsAnswerParser = new FunctionsAnswerParser(logger);
-            this.mainViewModel = new MainViewModel(logger);
 
             // "+Communicator GPRS-3G-LTE FirmWare:07.130523+?"
-            this.infoAnswerOk = Convert.FromHexString("01112B436F6D6D756E696361746F7220475052532D33472D4C5445204669726D576172653A30372E3133303532332B90");
+            // 01112B436F6D6D756E696361746F7220475052532D33472D4C5445204669726D576172653A30372E3133303532332B90
+            this.infoAnswerOk = Convert.FromHexString("01112F436F6D6D756E696361746F7220475052532D33472D4C54455F534C4D204669726D576172653A30382E3132313232336C06");
+
+
 
             this.netModeAndNetLevelOk = Convert.FromHexString("010302800F9980");
 
             this.netConfigOk = Convert.FromHexString("010304000C1A003150");
 
             this.configOk = Convert.FromHexString("0103260B76706E322E6D74732E62790376706E0A3226316C3127303E3F60043430303101360300000026B1");
-        }
-
-        ~MainViewModelTests()
-        {
-            this.Dispose();
-        }
-
-        public void Dispose()
-        {
-            this.mainViewModel.Dispose();
-
-            GC.SuppressFinalize(this);
         }
 
         [Fact(DisplayName = "Проверка разбора массива байт с описанием устройства - имеется название.")]
