@@ -24,7 +24,7 @@ public sealed class FunctionsAnswerParser
 
         if (packet.Crc16 != packet.CalculatedCrc16)
         {
-            this.logger.LogError("The checksum of the data packet does not match! In the packet {CrcPacket}, and the disheveled one {CrcCalculated:X2}.", packet.Crc16, packet.CalculatedCrc16);
+            this.logger.LogWarning("The checksum of the data packet does not match! In the packet {CrcPacket:X2}, and the disheveled one {CrcCalculated:X2}.", packet.Crc16, packet.CalculatedCrc16);
 
             // return;
         }
@@ -40,9 +40,9 @@ public sealed class FunctionsAnswerParser
         }
         else
         {
-            string s = data[..(pos - 2)];
+            string s = data[..(pos - 1)];
 
-            result.Name = s.StartsWith('+') ? data.Substring(1, pos - 2) : data[..(pos - 2)];
+            result.Name = s.StartsWith('+') ? data.Substring(1, pos - 2) : data[..(pos - 1)];
 
             s = data[(pos + "FirmWare".Length + 1)..];
 
