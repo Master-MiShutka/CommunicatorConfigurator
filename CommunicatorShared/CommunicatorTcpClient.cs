@@ -216,6 +216,8 @@ public partial class CommunicatorTcpClient : IDisposable
                 {
                     received = await this.tcpClient.Client.ReceiveAsync(this.buffer, receiveCts.Token);
 
+                    this.logger.LogTrace($"Available {this.tcpClient.Client.Available} bytes.");
+
                     break;
                 }
                 catch (System.Net.Sockets.SocketException se)
@@ -354,7 +356,14 @@ public partial class CommunicatorTcpClient : IDisposable
         }
         catch (SocketException se)
         {
-            this.logger.LogCritical(se, Resources.Strings.CONNECT_ERROR);
+            if (se.SocketErrorCode == SocketError.TimedOut)
+            {
+                this.logger.LogWarning(se, Resources.Strings.CONNECT_ERROR);
+            }
+            else
+            {
+                this.logger.LogCritical(se, Resources.Strings.CONNECT_ERROR);
+            }
 
             this.OnError?.Invoke(se);
         }
