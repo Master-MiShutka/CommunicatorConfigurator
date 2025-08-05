@@ -79,6 +79,8 @@ namespace TMP.Work.CommunicatorPSDTU.UI.Wpf
             string message = $"App_DispatcherUnhandledException :: {e.Exception.Message}\n" + trace;
 
             logger?.LogError(e.Exception, message);
+
+            e.Handled = true;
         }
 
         protected override void OnStartup(StartupEventArgs e)
