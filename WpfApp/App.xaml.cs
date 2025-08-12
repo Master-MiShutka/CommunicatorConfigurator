@@ -20,13 +20,13 @@ namespace TMP.Work.CommunicatorPSDTU.UI.Wpf
 
         private MainViewModel? mainViewModel;
 
-        private static readonly TextFileLoggerProvider LoggerProvider = new("journal.log") { MinLevel = LogLevel.Trace };
+        private static readonly TextFileLoggerProvider LoggerProvider = new("CommunicatorPSDTU_journal.log") { MinLevel = LogLevel.Trace };
 
         static App()
         {
             logger = LoggerProvider.CreateLogger(LOGGER_NAME);
 
-            AppDomain.CurrentDomain.FirstChanceException += CurrentDomain_FirstChanceException;
+            // AppDomain.CurrentDomain.FirstChanceException += CurrentDomain_FirstChanceException;
 
             AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
         }
