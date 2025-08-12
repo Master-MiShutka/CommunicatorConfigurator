@@ -245,7 +245,7 @@ Pieralik možna ŭstavić z bufiera abmienu. U bufiery pavinna być tablica z dv
     <value>Nastrojki RS485</value>
   </data>
   <data name="Function_not_supported_or_no_data" xml:space="preserve">
-    <value>Funkcyja prylady nie padtrymlivajecca aĺbo atrymany nikoli nie adkaz ad prylady.</value>
+    <value>Funkcyja nie padtrymlivajecca pryladaj, ci z prylady byŭ atrymany niedapuščaĺny adkaz.</value>
   </data>
   <data name="Write_settings" xml:space="preserve">
     <value>Zapisać paramietry ŭ pryladu</value>
