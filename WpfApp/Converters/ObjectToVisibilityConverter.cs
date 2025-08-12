@@ -11,7 +11,7 @@ public class ObjectToVisibilityConverter : IValueConverter
 
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        bool condition = value == null;
+        bool condition = value is bool boolValue ? !boolValue : value == null;
 
         if (this.IsNegative)
         {
