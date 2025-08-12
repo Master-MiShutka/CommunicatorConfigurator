@@ -246,7 +246,7 @@
     <value>Настройки RS485</value>
   </data>
   <data name="Function_not_supported_or_no_data" xml:space="preserve">
-    <value>Функция использования не приводит к получению неверного ответа от устройства.</value>
+    <value>Функция не поддерживается устройством, или с устройства был получен недопустимый ответ.</value>
   </data>
   <data name="Write_settings" xml:space="preserve">
     <value>Сохраните параметры на устройстве</value>
