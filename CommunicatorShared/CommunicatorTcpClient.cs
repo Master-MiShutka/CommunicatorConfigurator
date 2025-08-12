@@ -393,7 +393,7 @@ public partial class CommunicatorTcpClient : IDisposable
     /// <returns>информация об устройстве</returns>
     public async Task<Info> ReadInfoAsync()
     {
-        this.logger.LogTrace("Start reading version");
+        this.logger.LogTrace("ReadInfo: start reading version");
 
         Model.Info result = new();
 
@@ -403,11 +403,11 @@ public partial class CommunicatorTcpClient : IDisposable
         {
             this.answerParser.ParseInfo(this.buffer, ref result);
 
-            this.logger.LogTrace("Result: {Result}", result);
+            this.logger.LogTrace("ReadInfo result: {Result}", result);
         }
         else
         {
-            this.logger.LogWarning("The operation failed.");
+            this.logger.LogWarning("ReadInfo: The operation failed.");
         }
 
         return result;
@@ -419,14 +419,14 @@ public partial class CommunicatorTcpClient : IDisposable
     /// <returns>конфигурация сети</returns>
     public async Task<Model.NetworkConfig> ReadNetworkConfigAsync()
     {
-        this.logger.LogTrace("Start reading network configuration");
+        this.logger.LogTrace("ReadNetworkConfig: start reading network configuration");
 
         Model.NetworkConfig networkConfig = new();
 
         int receivedBytes = await this.SendRequestAndReceiveDataAsync(Resources.UI_strings.ReadingNetworkConfiguration, Requests.ReadNetworkConfigRequest);
 
         this.answerParser.ParseNetworkConfig(this.buffer.AsSpan(0, receivedBytes), ref networkConfig);
-        this.logger.LogTrace("Result: {Result}", networkConfig);
+        this.logger.LogTrace("ReadNetworkConfig result: {Result}", networkConfig);
 
         return networkConfig;
     }
@@ -437,7 +437,7 @@ public partial class CommunicatorTcpClient : IDisposable
     /// <returns>режим сети и уровень сигнала</returns>
     public async Task<(string NetMode, byte NetLevel)> ReadNetworkModeAndLevelAsync()
     {
-        this.logger.LogTrace("Start reading signal strength and network mode");
+        this.logger.LogTrace("ReadNetworkModeAndLevel: start reading signal strength and network mode");
 
         (string netMode, byte netLevel) result = (string.Empty, 0);
 
@@ -446,9 +446,9 @@ public partial class CommunicatorTcpClient : IDisposable
         if (receivedBytes > 0)
         {
             this.answerParser.ParseNetworkModeAndLevel(this.buffer.AsSpan(0, receivedBytes), ref result);
-
-            this.logger.LogTrace("Result: {NetMode}, signal strength: {NetLevel}.", result.netMode, result.netLevel);
         }
+
+        this.logger.LogTrace("ReadNetworkModeAndLevel result: {NetMode}, signal strength: {NetLevel}.", result.netMode, result.netLevel);
 
         return result;
     }
@@ -459,7 +459,7 @@ public partial class CommunicatorTcpClient : IDisposable
     /// <returns>конфигурация</returns>
     public async Task<(Model.Config DeviceConfig, Model.SerialConfig SerialConfig)> ReadConfig()
     {
-        this.logger.LogTrace("Start reading configuration");
+        this.logger.LogTrace("ReadConfig: start reading configuration");
 
         (Model.Config deviceConfig, Model.SerialConfig serialConfig) result = new(new Config(), new SerialConfig());
 
@@ -469,11 +469,11 @@ public partial class CommunicatorTcpClient : IDisposable
         {
             this.answerParser.ParseConfig(this.buffer.AsSpan(0, receivedBytes), ref result);
 
-            this.logger.LogTrace("Configuration: {Config}.", result);
+            this.logger.LogTrace("ReadConfig configuration: {Config}.", result);
         }
         else
         {
-            this.logger.LogWarning("The operation failed.");
+            this.logger.LogWarning("ReadConfig: the operation failed.");
         }
 
         return result;
@@ -481,7 +481,7 @@ public partial class CommunicatorTcpClient : IDisposable
 
     public async Task<bool> WriteDeviceConfig(Model.Config deviceConfig, Model.SerialConfig serialConfig)
     {
-        this.logger.LogTrace("Start recording new configuration");
+        this.logger.LogTrace("WriteDeviceConfig: start recording new configuration");
 
         ArraySegment<byte> packet = Builder.RequestBuilder.WriteDeviceConfigRequest(deviceConfig, serialConfig, this.logger);
 
@@ -498,19 +498,19 @@ public partial class CommunicatorTcpClient : IDisposable
                 switch (errorCode)
                 {
                     case 0x0:
-                        this.logger.LogInformation("There are no errors.");
+                        this.logger.LogInformation("WriteDeviceConfig: there are no errors.");
                         return true;
                     case 0x02:
-                        this.logger.LogInformation("Invalid write address. Error in Write Address or Number of Write Registers fields..");
+                        this.logger.LogInformation("WriteDeviceConfig: : invalid write address. Error in Write Address or Number of Write Registers fields..");
                         break;
                     case 0x03:
-                        this.logger.LogInformation("Error in data fields.");
+                        this.logger.LogInformation("WriteDeviceConfig: error in data fields.");
                         break;
                     case 0x06:
-                        this.logger.LogInformation("Error in CRC16 field, the checksum of the parcel is not calculated correctly.");
+                        this.logger.LogInformation("WriteDeviceConfig: error in CRC16 field, the checksum of the parcel is not calculated correctly.");
                         break;
                     default:
-                        this.logger.LogInformation("Unknown error code: {ErrorCode}", errorCode);
+                        this.logger.LogInformation("WriteDeviceConfig: unknown error code: {ErrorCode}", errorCode);
                         break;
                 }
             }
@@ -519,7 +519,7 @@ public partial class CommunicatorTcpClient : IDisposable
         }
         else
         {
-            this.logger.LogWarning("The operation failed.");
+            this.logger.LogWarning("WriteDeviceConfig: the operation failed.");
 
             return false;
         }
