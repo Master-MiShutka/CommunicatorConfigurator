@@ -363,20 +363,16 @@ namespace TMP.Work.CommunicatorPSDTU.Common.ViewModels
                     // чтение конфигурации устройства
                     var config = await client.ReadConfig();
 
-                    if (config.DeviceConfig != null && config.SerialConfig != null)
-                    {
+                    this.DeviceConfig = config.DeviceConfig;
+                    this.DeviceRs485Config = config.SerialConfig;
 
-                        this.DeviceConfig = config.DeviceConfig;
-                        this.DeviceRs485Config = config.SerialConfig;
+                    this.NewDeviceConfig = this.DeviceConfig.CloneConfig();
+                    this.NewRs485Config = this.DeviceRs485Config.CloneConfig();
 
-                        this.NewDeviceConfig = this.DeviceConfig.CloneConfig();
-                        this.NewRs485Config = this.DeviceRs485Config.CloneConfig();
+                    this.logger.LogTrace($"NewDeviceConfig={this.NewDeviceConfig}");
+                    this.logger.LogTrace($"NewRs485Config={this.NewRs485Config}");
 
-                    }
-                    else
-                    {
-                        this.logger.LogTrace("config.DeviceConfig == null || config.SerialConfig == null");
-                    }
+                    this.logger.LogTrace("All device info readed.");
 
                     #endregion
 
