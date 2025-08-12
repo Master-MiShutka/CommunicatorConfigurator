@@ -246,7 +246,7 @@
     <value>Настройкі RS485</value>
   </data>
   <data name="Function_not_supported_or_no_data" xml:space="preserve">
-    <value>Функцыя прылады не падтрымліваецца альбо атрыманы ніколі не адказ ад прылады.</value>
+    <value>Функцыя не падтрымліваецца прыладай альбо несапраўдны адказ быў атрыманы з прылады.</value>
   </data>
   <data name="Write_settings" xml:space="preserve">
     <value>Запісаць параметры ў прыладу</value>
