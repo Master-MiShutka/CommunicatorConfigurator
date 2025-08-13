@@ -19,9 +19,9 @@
             Padding="10"
             Text="{Binding Function_not_supported_or_no_data, Source={StaticResource LocUiStrings}}"
             TextAlignment="Center"
-            Visibility="{Binding Path=NewRs485Config, Converter={StaticResource ObjectToVisibilityConverter}}" />
+            Visibility="{Binding Path=NewRs485Config, Converter={StaticResource ObjectToVisibilityReConverter}}" />
         <!--    -->
-        <DockPanel Visibility="{Binding Path=NewRs485Config, Converter={StaticResource ObjectToVisibilityReConverter}}">
+        <DockPanel Visibility="{Binding Path=NewRs485Config, Converter={StaticResource ObjectToVisibilityConverter}}">
             <Button
                 Margin="0,10"
                 Padding="20,5"
